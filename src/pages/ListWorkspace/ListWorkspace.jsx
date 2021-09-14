@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react';
+import {ListLayout} from '../../components/layout';
 
 function ListWorkspace() {
+   
     return (
-        <div>
-            ListWorkspace
-        </div>
+        <>
+            <ListLayout/>
+        </>
     )
 }
 
