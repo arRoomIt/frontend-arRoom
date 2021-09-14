@@ -68,13 +68,13 @@ import {
     VisuallyHidden
   } from '@chakra-ui/react'
   import * as React from 'react'
-  import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa'
+  import { FaGoogle } from 'react-icons/fa'
   import { Card } from './Card'
   import { DividerWithText } from './DividerWithText'
   import { Link } from './Link'
   import { LoginForm } from './LoginForm'
   import { Logo } from './Logo'
-  import {PasswordField} from './PasswordField'
+ 
   
   const Login = () => (
     <Box

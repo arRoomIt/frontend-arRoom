@@ -30,7 +30,7 @@ export const register = async (form) => {
 
 
 
-export const login = async (form) => {
+export const loginApi = async (form) => {
     const req = await fetch(loginUrl, {
         method: 'POST',
         headers: {

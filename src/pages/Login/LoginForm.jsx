@@ -1,19 +1,61 @@
 import { Button, chakra, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react'
 import * as React from 'react'
+import { useState } from 'react'
 import { PasswordField } from './PasswordField'
-import { login } from '../../api/auth.api';
+import { loginApi } from '../../api/auth.api';
 
-export const LoginForm = (props) => (
-  <chakra.form
-    onSubmit={(e) => {
-      e.preventDefault() // your login logic here
-    }}
-    {...props}
-  >
+
+
+const INITIAL_STATE = {
+    email: '',
+    password: '',
+}
+
+function LoginForm (props) {
+
+    const  [state, setState] = useState(INITIAL_STATE);
+
+    const inputChange = (event) => {
+        const { name, value } = event.target;
+        setState({ ...state, [name]: value });
+        
+        console.log(state);
+    };
+    
+    return (
+
+        <chakra.form
+        onSubmit={async(e) => {
+            e.preventDefault() 
+           try {
+               
+            const form = {
+                email: e.target.email.value,
+                password: e.target.password.value,
+            }
+            console.log(form);
+
+            const user = await loginApi(form);
+            console.log(user);
+
+           } catch (error) {
+               console.log(error);
+           }
+
+
+        }}
+        {...props}
+        >
     <Stack spacing="6">
       <FormControl id="email">
         <FormLabel>Email address</FormLabel>
-        <Input name="email" type="email" autoComplete="email" required />
+        <Input 
+            name="email" 
+            type="email"
+            value={state.email} 
+            autoComplete="email"
+            onChange={inputChange}
+            required />
       </FormControl>
       <PasswordField />
       <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
@@ -21,4 +63,8 @@ export const LoginForm = (props) => (
       </Button>
     </Stack>
   </chakra.form>
-)
+
+    )
+}
+
+export { LoginForm };
