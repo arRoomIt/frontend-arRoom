@@ -4,30 +4,27 @@ import { getListWorkspace } from '../../../api/WorkspaceApi';
 
 function ListLayout() {
 
-   
     const [list, setList] = useState([]);
    
     useEffect(() => {
-      getListWorkspace()
-  
-      const data= getListWorkspace();
-      setList(data);
+
+      getListWorkspace().then(data => {
+        setList(data);
+        console.log("ListLayout-->",data);
+        })
     },[]
   );
-          
-       
+
     return (
         <>
            <Header/>
-           <div>
-                {list.map(element =>{
-                    return(
-                       <div key={element.id}> 
-                            <h1>{element.title}</h1>
-                       </div>
-                    )})}
-           </div>
-            <Card />
+            <div>
+              {list.map(element => {
+                return(
+                  <Card key={element._id} workspace={element} />
+                )
+              })}
+            </div>
         </>
     )
 }
