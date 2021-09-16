@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from 'react'
 import { Link as ReachLink } from "react-router-dom";
 import {
   chakra,
@@ -16,11 +16,15 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-import {  } from "react-icons/io";
+import { } from "react-icons/io";
 import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
-import {BsFillPeopleFill,BsSearch } from "react-icons/bs";
+import { BsFillPeopleFill, BsSearch } from "react-icons/bs";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Logo } from "@choc-ui/logo";
+
+import { UserContext } from '../../auth/UserContext';
+import Logout from './Logout/Logout';
+
 
 function Header(props) {
   const bg = useColorModeValue("white", "gray.800");
@@ -30,7 +34,8 @@ function Header(props) {
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
 
- 
+  const [userContext] = useContext(UserContext);
+
 
   const MobileNavContent = (
     <VStack
@@ -54,31 +59,31 @@ function Header(props) {
         onClick={mobileNav.onClose}
       />
       <Link as={ReachLink} to="/">
-      <Button w="full" variant="ghost"  leftIcon={<AiFillHome />}>
-        Home
-      </Button>
+        <Button w="full" variant="ghost" leftIcon={<AiFillHome />}>
+          Home
+        </Button>
       </Link>
       <Link as={ReachLink} to="/list">
-      <Button
-        w="full"
-        variant="ghost"
-        colorScheme="brand"
-        
-        leftIcon={<BsSearch />}
-      >
-        Workspaces
-      </Button>
+        <Button
+          w="full"
+          variant="ghost"
+          colorScheme="brand"
+
+          leftIcon={<BsSearch />}
+        >
+          Workspaces
+        </Button>
       </Link>
       {/* //TODO:AGREGAR RUTA */}
-      <Link as={ReachLink} to="/"> 
-      <Button
-        w="full"
-        variant="ghost"
-        colorScheme="brand"
-        leftIcon={<BsFillPeopleFill />}
-      >
-        Perfil
-      </Button>
+      <Link as={ReachLink} to="/">
+        <Button
+          w="full"
+          variant="ghost"
+          colorScheme="brand"
+          leftIcon={<BsFillPeopleFill />}
+        >
+          Perfil
+        </Button>
       </Link>
     </VStack>
   );
@@ -94,17 +99,17 @@ function Header(props) {
             <HStack spacing={1}>
               <Box role="group">
                 <Link as={ReachLink} to="/">
-                <Button
-                  bg={bg}
-                  color="gray.500"
-                  alignItems="center"
-                  fontSize="md"
-                  _hover={{ color: cl }}
-                  _focus={{ boxShadow: "none" }}
-                  rightIcon={<AiFillHome />}
-                >
-                  Home
-                </Button>
+                  <Button
+                    bg={bg}
+                    color="gray.500"
+                    alignItems="center"
+                    fontSize="md"
+                    _hover={{ color: cl }}
+                    _focus={{ boxShadow: "none" }}
+                    rightIcon={<AiFillHome />}
+                  >
+                    Home
+                  </Button>
                 </Link>
                 <Box
                   pos="absolute"
@@ -117,17 +122,17 @@ function Header(props) {
                 </Box>
               </Box>
               <Link as={ReachLink} to="/list">
-              <Button
-                bg={bg}
-                color="gray.500"
-                display="inline-flex"
-                alignItems="center"
-                fontSize="md"
-                _hover={{ color: cl }}
-                _focus={{ boxShadow: "none" }}
-              >
-                Workspaces
-              </Button>
+                <Button
+                  bg={bg}
+                  color="gray.500"
+                  display="inline-flex"
+                  alignItems="center"
+                  fontSize="md"
+                  _hover={{ color: cl }}
+                  _focus={{ boxShadow: "none" }}
+                >
+                  Workspaces
+                </Button>
               </Link>
               <Button
                 bg={bg}
@@ -138,13 +143,36 @@ function Header(props) {
                 _hover={{ color: cl }}
                 _focus={{ boxShadow: "none" }}
               >
-                
+
               </Button>
             </HStack>
           </Box>
           <Spacer />
           <Box display="flex" alignItems="center">
-            <HStack spacing={1}>
+
+            {userContext === null &&
+
+              <HStack spacing={1}>
+                <Link as={ReachLink} to="/login">
+                  <Button colorScheme="brand" variant="ghost" size="sm">
+                    Sign in
+                  </Button>
+                </Link>
+                <Link as={ReachLink} to="/register">
+                  <Button colorScheme="teal" variant="solid" size="sm">
+                    Sign up
+                  </Button>
+                </Link>
+              </HStack>
+
+            }
+
+            {userContext !== null &&
+                <Logout/>
+            }
+
+
+            {/* <HStack spacing={1}>
               <Link as={ReachLink} to="/register">
               <Button colorScheme="brand" variant="ghost" size="sm">
                 Sign in
@@ -155,7 +183,7 @@ function Header(props) {
                 Sign up
               </Button>
               </Link>
-            </HStack>
+            </HStack> */}
             <IconButton
               size="md"
               fontSize="lg"

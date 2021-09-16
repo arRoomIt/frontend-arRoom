@@ -5,6 +5,8 @@ import Slider from './Slider';
 import Card from './Card';
 import Paginacion from './Paginacion';
 import Footer from './Footer';
+import Logout from './Logout/Logout';
+
 
 export {
     Header,
@@ -13,5 +15,6 @@ export {
     Slider,
     Card,
     Paginacion,
-    Footer
+    Footer,
+    Logout
 }
