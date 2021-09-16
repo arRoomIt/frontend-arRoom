@@ -1,10 +1,14 @@
-import React,{useState,useEffect} from 'react';
-import { Header, Card} from '../../sections';
+import React,{useState,useEffect,Dimensions} from 'react';
+import { Header, Card,Paginacion,Footer} from '../../sections';
 import { getListWorkspace } from '../../../api/WorkspaceApi';
+import { SimpleGrid,Divider } from "@chakra-ui/react"
+
 
 function ListLayout() {
 
     const [list, setList] = useState([]);
+    let intViewportWidth = window.innerWidth;
+    console.log(intViewportWidth);
    
     useEffect(() => {
 
@@ -14,19 +18,44 @@ function ListLayout() {
         })
     },[]
   );
+  
+  if(intViewportWidth <= 768){
+      return(
+        <>
+        <Header/>
+         <div>
+         <SimpleGrid columns={1} spacingX="40px" spacingY="20px">
+           {list.map(element => {
+             return(
+               <Card key={element._id} workspace={element} />
+             )
+           })}
+           </SimpleGrid>
+         </div>
+         <Paginacion/>
+         <Footer/>
+     </>
+      )
+  }
 
     return (
         <>
            <Header/>
+           <Divider orientation="horizontal" />
             <div>
+            <SimpleGrid columns={4} spacingX="40px" spacingY="20px">
               {list.map(element => {
                 return(
                   <Card key={element._id} workspace={element} />
                 )
               })}
+              </SimpleGrid>
             </div>
+            <Paginacion/>
+            <Footer/>
         </>
     )
+
 }
 
 export default ListLayout;
