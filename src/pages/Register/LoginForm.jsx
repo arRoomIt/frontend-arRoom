@@ -82,14 +82,14 @@ function LoginForm (props) {
           </label>
           <input type="file" name="image" value={state.image} onChange={inputChange} />
         </div> */}
-        <FormLabel>Image</FormLabel>
+        {/* <FormLabel>Image</FormLabel>
         <Input 
           type="file"
           value={selectedFile} 
-          onChange={(e) => secSelectedFile(e.target.files[0])} 
+          onChange={(e) => secSelectedFile(e.target.files)} 
           required 
           accept=".jpg, .png" 
-        />
+        /> */}
          
         <FormLabel>Phone Number</FormLabel>
         <Input 
