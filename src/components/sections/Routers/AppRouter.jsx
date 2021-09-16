@@ -1,20 +1,16 @@
 import React from 'react'
-import { Home,Login,Register,ListWorkspace,DetailWorkspace } from '../../../pages/index';
-import{Header} from '..';
+import { Login,Register } from '../../../pages/index';
+import{DashboardRouter} from '../Routers/DashboardRouter';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function AppRouter() {
     return (
         <Router>
-            <div>
-                <Header/>
-            </div>
+            
 
-      <Switch>
+        <Switch>
         
-        <Route exact path="/" component={Home}>
-          <Home/>
-        </Route>
+        
 
         <Route path="/login" component={Login}>
           <Login/>
@@ -24,18 +20,12 @@ function AppRouter() {
           <Register/>
         </Route>
 
-        <Route path="/list" component={ListWorkspace}>
-          <ListWorkspace/>
+        <Route path="/" component={DashboardRouter}>
+          <DashboardRouter/>
         </Route>
+        
 
-        <Route path="/detail" component={DetailWorkspace}>
-          <DetailWorkspace/>
-        </Route>
-
-        <Route path="*">
-          <h1>404 Page Not Found</h1>
-        </Route>
-
+        
       </Switch>
 
     </Router>

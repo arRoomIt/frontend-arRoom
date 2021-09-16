@@ -18,3 +18,18 @@ export const getListWorkspace = async () => {
 
   return data;
 };
+
+export const createWorkspace = async () => {
+  const res = await fetch(BASE_URL, {
+    method: "POST",
+  });
+
+  const data = await res.json();
+  console.log("getListWorkspace", data);
+
+  if (!res.ok) {
+    throw new Error(res.message);
+  }
+
+  return data;
+};
