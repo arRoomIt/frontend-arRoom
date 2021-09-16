@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image, Badge, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Image, Badge, useColorModeValue,Link } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
 const Card = (props) => {
@@ -8,41 +8,43 @@ const Card = (props) => {
         title,
         price,
         totalOccupancy,
-        images
+        images,
+        reviews
     } = props.workspace;
 
 
   const property = {
-    imageUrl: images,
+    imageUrl: "https://bit.ly/2Z4KKcF",
     imageAlt: title,
     people: totalOccupancy,
-    baths: 2,
     title: title,
     formattedPrice: price,
-    reviewCount: 34,
-    rating: 4,
+    reviewCount: reviews.length,
+    // rating: 4,
   };
 
   return (
     <Flex
-      bg={useColorModeValue("#F9FAFB", "gray.600")}
+      bg={useColorModeValue("#F9FAFB", "gray.800")}
       p={50}
       w="full"
       alignItems="center"
       justifyContent="center"
     >
       <Box
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue("white", "gray.900")}
         maxW="sm"
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
       >
+        <Link href="/">
         <Image
           src={property.imageUrl}
           alt={property.imageAlt}
           roundedTop="lg"
         />
+        </Link>
 
         <Box p="6">
           <Box d="flex" alignItems="baseline">
@@ -79,14 +81,14 @@ const Card = (props) => {
           </Box>
 
           <Box d="flex" mt="2" alignItems="center">
-            {Array(5)
+            {/* {Array(5)
               .fill("")
               .map((_, i) => (
                 <StarIcon
                   key={i}
                   color={i < property.rating ? "teal.500" : "gray.300"}
                 />
-              ))}
+              ))} */}
             <Box as="span" ml="2" color="gray.600" fontSize="sm">
               {property.reviewCount} reviews
             </Box>
