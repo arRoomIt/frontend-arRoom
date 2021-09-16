@@ -2,7 +2,7 @@ import { Button, chakra, FormControl, FormLabel, Input, Stack } from '@chakra-ui
 import * as React from 'react'
 import { PasswordField } from './PasswordField'
 import { useState } from 'react'
-import { Checkbox, CheckboxGroup } from "@chakra-ui/react"
+import { Checkbox } from "@chakra-ui/react"
 
 const INITIAL_STATE = {
   name: '',
