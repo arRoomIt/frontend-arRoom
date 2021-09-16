@@ -29,7 +29,7 @@ function AppRouter() {
         </Route>
 
         <Route path="/detail" component={DetailWorkspace}>
-          <ListWorkspace/>
+          <DetailWorkspace/>
         </Route>
 
         <Route path="*">
