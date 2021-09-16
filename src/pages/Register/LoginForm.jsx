@@ -13,9 +13,12 @@ const INITIAL_STATE = {
   image: '',
 }
 
+
 function LoginForm (props) {
 
   const [state, setState] = useState(INITIAL_STATE);
+
+  const [selectedFile, secSelectedFile] = useState(null);
 
   const inputChange = (event) => {
     const { name, value } = event.target;
@@ -30,6 +33,8 @@ function LoginForm (props) {
     <chakra.form
     onSubmit={async(e) => {
       e.preventDefault() 
+
+      console.log(e.target.files);
       try {
 
         const form = {
@@ -59,7 +64,7 @@ function LoginForm (props) {
           value={state.name}  
           autoComplete="email"
           onChange={inputChange} 
-          required 
+          
         />
         <FormLabel>Email</FormLabel>
         <Input 
@@ -68,22 +73,31 @@ function LoginForm (props) {
           value={state.email}  
           autoComplete="email"
           onChange={inputChange} 
-          required 
+           
         />
+        <PasswordField />
+        {/* <div>
+          <label>
+            Image
+          </label>
+          <input type="file" name="image" value={state.image} onChange={inputChange} />
+        </div> */}
         <FormLabel>Image</FormLabel>
         <Input 
           type="file"
-          value={state.image} 
-          onChange={inputChange} 
+          value={selectedFile} 
+          onChange={(e) => secSelectedFile(e.target.files[0])} 
           required 
+          accept=".jpg, .png" 
         />
+         
         <FormLabel>Phone Number</FormLabel>
         <Input 
-          name="text" 
+          name="phoneNumber" 
           type="text"
           value={state.phoneNumber}  
           onChange={inputChange} 
-          required 
+           
         />
       </FormControl>
         <Checkbox
@@ -91,10 +105,9 @@ function LoginForm (props) {
         type="checkbox" 
         value={state.isHost}
         onChange={inputChange}
-        fontWeight="semibold">Is Host</Checkbox>
-      <PasswordField />
+        fontWeight="semibold">Are you Host?</Checkbox>
       <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
-        Sign in
+        Sign Up
       </Button>
     </Stack>
   </chakra.form>

@@ -59,7 +59,7 @@ function LoginForm (props) {
       </FormControl>
       <PasswordField />
       <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
-        Sign in
+        Sign In
       </Button>
     </Stack>
   </chakra.form>
