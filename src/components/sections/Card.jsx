@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Flex, Image, Badge, useColorModeValue,Link } from "@chakra-ui/react";
+import { Link as ReachLink } from "react-router-dom";
 import { StarIcon } from "@chakra-ui/icons";
 
 const Card = (props) => {
@@ -38,7 +39,8 @@ const Card = (props) => {
         rounded="lg"
         shadow="lg"
       >
-        <Link href="/">
+        
+        <Link as={ReachLink} to="/detail">
         <Image
           src={property.imageUrl}
           alt={property.imageAlt}

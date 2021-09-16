@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as ReachLink } from "react-router-dom";
 import {
   chakra,
   Box,
@@ -55,7 +56,7 @@ const Hero = () => {
           spacing={2}
           justifyContent={{ sm: "left", md: "center" }}
         >
-            <Link href="/list">
+            <Link as={ReachLink} to="/list">
           <Button
             as="a"
             variant="solid"

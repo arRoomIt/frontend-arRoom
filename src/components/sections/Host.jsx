@@ -1,5 +1,6 @@
 import React from "react";
 import { chakra, Box, useColorModeValue, Icon, Image,Link } from "@chakra-ui/react";
+import { Link as ReachLink } from "react-router-dom";
 
 const Host = () => {
   const bg = useColorModeValue("white", "gray.800");
@@ -77,7 +78,7 @@ const Host = () => {
                 fontWeight="extrabold"
                 fontFamily="fantasy"
               >
-                <Link href="/register">
+                <Link as={ReachLink} to="/register">
                 <Box rounded="full" shadow="md">
                   <chakra.a
                     w="full"
