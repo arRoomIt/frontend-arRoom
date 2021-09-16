@@ -1,5 +1,5 @@
 import React,{useState,useEffect,Dimensions} from 'react';
-import { Header, Card,Paginacion,Footer} from '../../sections';
+import { Card,Paginacion,Footer} from '../../sections';
 import { getListWorkspace } from '../../../api/WorkspaceApi';
 import { SimpleGrid,Divider } from "@chakra-ui/react"
 
@@ -22,7 +22,7 @@ function ListLayout() {
   if(intViewportWidth <= 768){
       return(
         <>
-        <Header/>
+        
          <div>
          <SimpleGrid columns={1} spacingX="40px" spacingY="20px">
            {list.map(element => {
@@ -40,7 +40,7 @@ function ListLayout() {
 
     return (
         <>
-           <Header/>
+           
            <Divider orientation="horizontal" />
             <div>
             <SimpleGrid columns={4} spacingX="40px" spacingY="20px">

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as ReachLink } from "react-router-dom";
 import {
   chakra,
   Flex,
@@ -99,12 +100,12 @@ function Header(props) {
         justifySelf="self-start"
         onClick={mobileNav.onClose}
       />
-      <Link href="/">
+      <Link as={ReachLink} to="/">
       <Button w="full" variant="ghost"  leftIcon={<AiFillHome />}>
         Home
       </Button>
       </Link>
-      <Link href="/list">
+      <Link as={ReachLink} to="/list">
       <Button
         w="full"
         variant="ghost"
@@ -115,7 +116,8 @@ function Header(props) {
         Workspaces
       </Button>
       </Link>
-      <Link href="/">
+      //TODO:AGREGAR RUTA
+      <Link as={ReachLink} to="/"> 
       <Button
         w="full"
         variant="ghost"
@@ -132,13 +134,13 @@ function Header(props) {
     <React.Fragment>
       <chakra.header h="full" bg={bg} w="full" px={{ base: 2, sm: 4 }} py={4}>
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
-          <Link display="flex" alignItems="center" href="/">
+          <Link display="flex" alignItems="center" as={ReachLink} to="/">
             <Logo />
           </Link>
           <Box display={{ base: "none", md: "inline-flex" }}>
             <HStack spacing={1}>
               <Box role="group">
-                <Link href="/">
+                <Link as={ReachLink} to="/">
                 <Button
                   bg={bg}
                   color="gray.500"
@@ -161,7 +163,7 @@ function Header(props) {
 
                 </Box>
               </Box>
-              <Link href="/list">
+              <Link as={ReachLink} to="/list">
               <Button
                 bg={bg}
                 color="gray.500"
@@ -190,12 +192,12 @@ function Header(props) {
           <Spacer />
           <Box display="flex" alignItems="center">
             <HStack spacing={1}>
-              <Link href="/register">
+              <Link as={ReachLink} to="/register">
               <Button colorScheme="brand" variant="ghost" size="sm">
                 Sign in
               </Button>
               </Link>
-              <Link href="/login">
+              <Link as={ReachLink} to="/login">
               <Button colorScheme="teal" variant="solid" size="sm">
                 Sign up
               </Button>
