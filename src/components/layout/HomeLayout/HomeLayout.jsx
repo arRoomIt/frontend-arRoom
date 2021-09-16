@@ -1,11 +1,11 @@
 import React from 'react'
-import {Header,Hero,Host,Slider,Footer} from '../../sections';
+import {Hero,Host,Slider,Footer} from '../../sections';
 
 function HomeLayout() {
     return (
         <div>
             
-            <Header/>
+            
             <Hero/>
             <Slider/>
             <Host/>
