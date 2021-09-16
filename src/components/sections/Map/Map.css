@@ -1,8 +1,14 @@
 /* @import '../../../../node_modules/leaflet/dist/leaflet.css'; */
 
-
 .leaflet-container{
     margin: 0 auto;
-    width: 85%;
-    height: 40vh;
+    width: 55%;
+    height: 50vh;
+}
+
+@media (max-width: 640px) {
+    .leaflet-container {
+        width: 85%;
+        height: 30vh;
+    }
 }
