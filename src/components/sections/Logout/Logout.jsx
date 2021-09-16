@@ -1,16 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Button, Box } from "@chakra-ui/react";
 
+import { logout } from '../../../api/auth.api';
+import { UserContext } from '../../../auth/UserContext';
 
+const initialUser = {
+    _id: "",
+    email: "",
+    name: "",
+    googleId:"",
+    facebookId:"",
+    isHost: false,
+    profileImage: "",
+    hostsReview: [],
+    reservations: []
+}
 
 function Logout() {
 
-
+    const [setUserContext] = useContext(UserContext);
     const logoutUser = () => {
-        console.log("he sido pulsado")
-    }
-
+        logout()
+            .then(() =>{
+                setUserContext(initialUser)
+            })  
+    }       
 
     return (
         <Box>

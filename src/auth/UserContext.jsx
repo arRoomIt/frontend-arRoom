@@ -2,7 +2,17 @@ import React, { useState } from "react"
 
 const UserContext = React.createContext([{}, () => {}])
 
-const initialUser = {}
+const initialUser = {
+  _id: "",
+  email: "",
+  name: "",
+  googleId:"",
+  facebookId:"",
+  isHost: false,
+  profileImage: "",
+  hostsReview: [],
+  reservations: []
+}
 
 const UserProvider = props => {
   const [user, setUser] = useState(initialUser)

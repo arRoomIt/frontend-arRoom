@@ -36,7 +36,6 @@ function Header(props) {
 
   const [userContext] = useContext(UserContext);
 
-
   const MobileNavContent = (
     <VStack
       pos="absolute"
@@ -150,7 +149,7 @@ function Header(props) {
           <Spacer />
           <Box display="flex" alignItems="center">
 
-            {userContext === null &&
+            {userContext._id === "" &&
 
               <HStack spacing={1}>
                 <Link as={ReachLink} to="/login">
@@ -164,26 +163,12 @@ function Header(props) {
                   </Button>
                 </Link>
               </HStack>
-
             }
 
-            {userContext !== null &&
+            {userContext._id !== "" &&
                 <Logout/>
             }
 
-
-            {/* <HStack spacing={1}>
-              <Link as={ReachLink} to="/register">
-              <Button colorScheme="brand" variant="ghost" size="sm">
-                Sign in
-              </Button>
-              </Link>
-              <Link as={ReachLink} to="/login">
-              <Button colorScheme="teal" variant="solid" size="sm">
-                Sign up
-              </Button>
-              </Link>
-            </HStack> */}
             <IconButton
               size="md"
               fontSize="lg"
