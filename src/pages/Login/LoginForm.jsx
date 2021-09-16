@@ -21,6 +21,7 @@ function LoginForm(props) {
   const [userContext, setUserContext] = useContext(UserContext);
 
   console.log(history);
+  console.log(userContext);
 
   const [state, setState] = useState(INITIAL_STATE);
   // const [rest,setReset] = useState(false);

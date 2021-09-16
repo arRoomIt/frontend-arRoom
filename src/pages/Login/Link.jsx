@@ -1,4 +1,4 @@
-import { chakra, HTMLChakraProps, useColorModeValue } from '@chakra-ui/system'
+import { chakra, useColorModeValue } from '@chakra-ui/system'
 import * as React from 'react'
 
 export const Link = (props) => (

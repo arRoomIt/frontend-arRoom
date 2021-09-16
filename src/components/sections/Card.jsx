@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Flex, Image, Badge, useColorModeValue,Link } from "@chakra-ui/react";
 import { Link as ReachLink } from "react-router-dom";
-import { StarIcon } from "@chakra-ui/icons";
 
 const Card = (props) => {
 
@@ -9,7 +8,7 @@ const Card = (props) => {
         title,
         price,
         totalOccupancy,
-        images,
+        // images,
         reviews
     } = props.workspace;
 

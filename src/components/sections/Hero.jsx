@@ -6,7 +6,7 @@ import {
   useColorModeValue,
   Button,
   Stack,
-  Image,
+  // Image,
   Text,
   Icon,
   Link

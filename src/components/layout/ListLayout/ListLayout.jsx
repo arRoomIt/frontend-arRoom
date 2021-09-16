@@ -1,4 +1,4 @@
-import React,{useState,useEffect,Dimensions} from 'react';
+import React,{useState,useEffect} from 'react';
 import { Card,Paginacion,Footer} from '../../sections';
 import { getListWorkspace } from '../../../api/WorkspaceApi';
 import { SimpleGrid,Divider } from "@chakra-ui/react"

@@ -7,22 +7,17 @@ import {
   Link,
   Button,
   useColorModeValue,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   Box,
   useDisclosure,
   Spacer,
   IconButton,
-  SimpleGrid,
-  Stack,
   VStack,
   CloseButton,
   useColorMode,
 } from "@chakra-ui/react";
 
 import {  } from "react-icons/io";
-import { AiFillHome, AiOutlineInbox, AiOutlineMenu } from "react-icons/ai";
+import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
 import {BsFillPeopleFill,BsSearch } from "react-icons/bs";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { Logo } from "@choc-ui/logo";
@@ -34,48 +29,6 @@ function Header(props) {
   const { toggleColorMode: toggleMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
-  const ic = useColorModeValue("teal.600", "teal.50");
-  const hbg = useColorModeValue("gray.50", "brand.400");
-  const tcl = useColorModeValue("gray.900", "gray.50");
-  const dcl = useColorModeValue("gray.500", "gray.50");
-  const hbgh = useColorModeValue("gray.100", "brand.500");
-
-  const Section = (props) => {
-    return (
-      <Link
-        m={-3}
-        p={3}
-        display="flex"
-        alignItems="start"
-        rounded="lg"
-        _hover={{ bg: hbg }}
-        href="/"
-        
-      >
-        <chakra.svg
-          flexShrink={0}
-          h={6}
-          w={6}
-          color={ic}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          {props.icon}
-        </chakra.svg>
-        <Box ml={4}>
-          <chakra.p fontSize="sm" fontWeight="700" color={tcl}>
-            {props.title}
-          </chakra.p>
-          <chakra.p mt={1} fontSize="sm" color={dcl}>
-            {props.children}
-          </chakra.p>
-        </Box>
-      </Link>
-    );
-  };
 
  
 
@@ -116,7 +69,7 @@ function Header(props) {
         Workspaces
       </Button>
       </Link>
-      //TODO:AGREGAR RUTA
+      {/* //TODO:AGREGAR RUTA */}
       <Link as={ReachLink} to="/"> 
       <Button
         w="full"
