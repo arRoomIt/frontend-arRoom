@@ -34,4 +34,4 @@ function Map() {
     )
 }
 
-export { Map };
+export default Map ;

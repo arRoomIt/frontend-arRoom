@@ -6,7 +6,8 @@ import Card from './Card';
 import Paginacion from './Paginacion';
 import Footer from './Footer';
 import Logout from './Logout/Logout';
-
+import CalendarDetail from './Calendar/Calendar'
+import Map from './Map/Map.jsx';
 
 export {
     Header,
@@ -16,5 +17,7 @@ export {
     Card,
     Paginacion,
     Footer,
-    Logout
+    Logout,
+    CalendarDetail,
+    Map
 }

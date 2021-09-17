@@ -1,12 +1,10 @@
-import React from 'react'
-import { Map } from '../../components/sections/Map/Map'
+import React from 'react';
+import {DetailLayout} from '../../components/layout';
 
 function DetailWorkspace() {
     return (
-        <div>
-            detail-workspace
-            <Map />
-        </div>
+        
+        <DetailLayout/>
     )
 }
 
