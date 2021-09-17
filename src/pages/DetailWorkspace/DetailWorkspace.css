@@ -1,0 +1,22 @@
+.boxImage {
+    display: flex;
+    justify-content: center;
+}
+.boxText {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid ;
+    border-top: 2px solid ;
+}
+.size{
+    font-size: 150%;
+}
+
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}

@@ -5,6 +5,7 @@ import { Link as ReachLink } from "react-router-dom";
 const Card = (props) => {
 
     const {
+        _id,
         title,
         price,
         totalOccupancy,
@@ -14,7 +15,7 @@ const Card = (props) => {
 
 
   const property = {
-    imageUrl: "https://bit.ly/2Z4KKcF",
+    imageUrl: images,
     imageAlt: title,
     people: totalOccupancy,
     title: title,
@@ -39,7 +40,7 @@ const Card = (props) => {
         shadow="lg"
       >
         
-        <Link as={ReachLink} to="/detail">
+        <Link as={ReachLink} to={`/detail/${_id}`}>
         <Image
           src={property.imageUrl}
           alt={property.imageAlt}
