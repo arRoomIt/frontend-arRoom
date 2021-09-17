@@ -1,24 +1,32 @@
-import { Button, InputGroup, InputRightElement, FormLabel, Input, Stack } from '@chakra-ui/react'
+import { Button, InputGroup, InputRightElement, FormLabel, Input,Text, Stack } from '@chakra-ui/react'
 import { PasswordField } from './PasswordField'
 
 import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom';
 
 import { useFormik } from "formik";
 
+import { registerApi } from '../../../api/auth.api';
+import { UserContext } from '../../../auth/UserContext';
+
 import './RgisterUser.scss';
 
+
 function RegisterHost(props) {
+
+  const history = useHistory();
+
+  const [user,setUserContext] = useContext(UserContext);
 
   const [show, setShow] = useState(false)
   const showPass = () => setShow(!show)
 
-  const validatePass = (password) => {
-    const re = /^((?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,})$/;
-    return re.test(String(password));
-  }
-
   const validate = (values) => {
     const errors = {};
+
+    if(!values.name){
+      errors.name = "Required";
+    }
 
     if (!values.email) {
       errors.email = "Required";
@@ -33,10 +41,8 @@ function RegisterHost(props) {
 
     if (!values.password) {
       errors.password = "Required";
-    } else{
-      if(validatePass(values.password)){
-        errors.password = "It must contain 8 characters, including Upper Class and Lowe class";
-      }
+    }else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/i.test(values.password)){
+      errors.password = "Minimum contain 8 characters, at least 1 letter and 1 number:";
     }
 
     if (!values.repassword) {
@@ -45,11 +51,17 @@ function RegisterHost(props) {
       errors.repassword = "Second password doesn't match";
     }
 
+    if(!values.phoneNumber){
+      errors.phoneNumber = "Required";
+    }
+
     return errors;
   };
 
+
   const formik = useFormik({
     initialValues: {
+      name: "",
       email: "",
       password: "",
       repassword: "",
@@ -59,16 +71,39 @@ function RegisterHost(props) {
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      //alert(JSON.stringify(values, null, 2));
+      registerApi(values)
+        .then((data)=>{
+            setUserContext(data);
+            history.push('/');
+
+        })
+        .catch(error => console.log(error));
+
     },
   });
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
+
+      <FormLabel>Name</FormLabel>
+        <Input
+          id="nameHost"
+          name="name"
+          type="name"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.name}
+        />
+        {formik.touched.name && formik.errors.name ? (
+          <Text color="tomato" className="error">{formik.errors.name}</Text>
+        ) : null}
+
+
         <FormLabel>Email</FormLabel>
         <Input
-          id="email"
+          id="emailHost"
           name="email"
           type="email"
           onChange={formik.handleChange}
@@ -76,13 +111,13 @@ function RegisterHost(props) {
           value={formik.values.email}
         />
         {formik.touched.email && formik.errors.email ? (
-          <div className="error">{formik.errors.email}</div>
+          <Text color="tomato" className="error">{formik.errors.email}</Text>
         ) : null}
         <FormLabel htmlFor="password">Password</FormLabel>
         <InputGroup size="md">
 
           <Input
-            id="password"
+            id="passwordHost"
             name="password"
             type={show ? "text" : "password"}
             placeholder="**********"
@@ -99,12 +134,12 @@ function RegisterHost(props) {
 
         </InputGroup>
         {formik.touched.password && formik.errors.password ? (
-          <div className="error">{formik.errors.password}</div>
+          <Text color="tomato" className="error">{formik.errors.password}</Text>
         ) : null}
 
         <FormLabel htmlFor="repassword">Repeat Password</FormLabel>
         <Input
-          id="repassword"
+          id="repasswordHost"
           name="repassword"
           type="password"
           onChange={formik.handleChange}
@@ -112,24 +147,26 @@ function RegisterHost(props) {
           value={formik.values.repassword}
         />
         {formik.touched.repassword && formik.errors.repassword ? (
-          <div className="error">{formik.errors.repassword}</div>
+          <Text color="tomato" className="error">{formik.errors.repassword}</Text>
         ) : null}
         <FormLabel>Phone Number</FormLabel>
         <Input
-          id="phoneNumber"
+          id="phoneNumberHost"
           name="phoneNumber"
-          type="tel"
+          onChange={formik.handleChange}
+          type="number"
           onBlur={formik.handleBlur}
           value={formik.values.phoneNumber}
         />
-        {formik.touched.repassword && formik.errors.repassword ? (
-          <div className="error">{formik.errors.repassword}</div>
+        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+          <Text color="tomato" className="error">{formik.errors.phoneNumber}</Text>
         ) : null}
         <FormLabel>Image Profile</FormLabel>
         <Input
-          id="image"
+          id="imageHost"
           name="image"
           type="file"
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.image}
         />

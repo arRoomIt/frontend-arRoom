@@ -2,8 +2,12 @@ import { Button, InputRightElement, FormLabel, Input, Stack,InputGroup,Text } fr
 import { PasswordField } from './PasswordField'
 
 import React , { useState,useContext } from 'react'
+import { useHistory } from 'react-router-dom';
 
 import { useFormik } from "formik";
+
+import { registerApi } from '../../../api/auth.api';
+import { UserContext } from '../../../auth/UserContext';
 
 import './RgisterUser.scss';
 
@@ -11,14 +15,17 @@ function RgisterUser(props) {
 
   const [show, setShow] = useState(false)
   const showPass = () => setShow(!show)
-
-  const validatePass = (password) => {
-    const re = /^((?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,})$/;
-    return re.test(String(password));
-  }
+  
+  const history = useHistory();
+  const [user,setUserContext] = useContext(UserContext);
 
   const validate = (values) => {
+
     const errors = {};
+
+    if(!values.name){
+      errors.name = "Required";
+    }
 
     if (!values.email) {
       errors.email = "Required";
@@ -32,11 +39,10 @@ function RgisterUser(props) {
 
     if (!values.password) {
       errors.password = "Required";
-    } else{
-      if(validatePass(values.password)){
-        errors.password = "It must contain 8 characters, including Upper Class and Lowe class";
-      }
+    }else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/i.test(values.password)){
+      errors.password = "Minimum contain 8 characters, at least 1 letter and 1 number:";
     }
+
 
     if (!values.repassword) {
       errors.repassword = "Required";
@@ -49,6 +55,7 @@ function RgisterUser(props) {
 
   const formik = useFormik({
     initialValues: {
+      name:"",
       email: "",
       password: "",
       repassword: "",
@@ -57,13 +64,32 @@ function RgisterUser(props) {
     },
     validate,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      registerApi(values)
+        .then((data) =>{
+          setUserContext(data);
+          history.push('/');
+        })
     },
   });
 
     return (
       <div>
       <form  onSubmit={formik.handleSubmit}>
+
+      <FormLabel>Name</FormLabel>
+        <Input
+          id="nameHost"
+          name="name"
+          type="name"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.name}
+        />
+        {formik.touched.name && formik.errors.name ? (
+          <Text color="tomato" className="error">{formik.errors.name}</Text>
+        ) : null}
+
         <FormLabel>Email</FormLabel>
         <Input
           id="email"

@@ -8,7 +8,8 @@ const logoutUrl = `${BASE_URL}/logout`;
 
 
 
-export const register = async (form) => {
+export const registerApi = async (form) => {
+    console.log(form);
     const req = await fetch(registerUrl, {
        method: 'POST',
        headers:{
@@ -24,6 +25,7 @@ export const register = async (form) => {
     if(!req.ok){
         throw new Error(response.message);
     }
+    console.log(response);
     return response;
 };
 
