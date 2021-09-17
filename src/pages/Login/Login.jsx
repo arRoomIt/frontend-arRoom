@@ -13,6 +13,7 @@ import {
   import { DividerWithText } from './DividerWithText'
   import { Link } from './Link'
   import { LoginForm } from './LoginForm'
+  import { Link as ReachLink } from "react-router-dom";
  
   
   const Login = () => (
@@ -34,7 +35,7 @@ import {
           <LoginForm />
           <Text mt="4" mb="8" align="center" maxW="md" fontWeight="medium">
           <Text as="span">Don&apos;t have an account?</Text>
-          <Link href="/register">Sign Up</Link>
+          <Link  as={ReachLink} to="/register">Sign Up</Link>
         </Text>
           <DividerWithText mt="6">or continue with</DividerWithText>
           <SimpleGrid mt="6" columns={1} spacing="3">
