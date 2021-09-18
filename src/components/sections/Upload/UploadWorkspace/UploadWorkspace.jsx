@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useFormik } from "formik";
 import { Button, InputGroup, InputRightElement, FormLabel, Input, Text, Stack,useColorModeValue,Box } from '@chakra-ui/react'
 
@@ -7,6 +7,10 @@ import { postWorkspace } from '../../../../api/WorkspaceApi';
 import locationiq from '../../../../locations/locationiq';
 
 function UploadWorkspace() {
+
+    const [fileInputState, setFileInputState] = useState("");
+
+    const [imgeEncoded,setImageEncoded] = useState();
 
     const validate = (values) => {
         const errors = {};
@@ -24,6 +28,8 @@ function UploadWorkspace() {
         return errors;
     };
 
+
+
     const formik = useFormik({
         initialValues: {
             title: "",
@@ -35,23 +41,45 @@ function UploadWorkspace() {
             hasAirHeating: "",
             hasInternet: "",
             price: "",
+            images:"",
             publishedAt: new Date(),
             isBooked: "false",
         },
         validate,
         onSubmit: async (values) => {
 
-            const newWorkspace ={...values} ;
+            console.log("form---->",values);
 
-            const location = await locationiq(values.direction);
-            newWorkspace.latitude = location.latitude;
-            newWorkspace.longitude = location.longitude;
-            
-            const createdWorkspace = await postWorkspace(newWorkspace);
-            console.log("linea 60-->",createdWorkspace);
+            try {
+                const newWorkspace ={...values};
+
+                newWorkspace.images = await readAsDataURL(fileInputState);
+                
+                const location = await locationiq(values.direction);
+                newWorkspace.latitude = location.latitude;
+                newWorkspace.longitude = location.longitude;
+                console.log(newWorkspace);
+                await postWorkspace(newWorkspace);
+
+            } catch (error) {
+                console.log(error);
+            }
 
         },
     });
+
+
+    const readAsDataURL = (file)=> {
+		return new Promise((resolve, reject)=>{
+			let fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+			fileReader.onloadend = function(){
+                setImageEncoded(fileReader.result);
+			}
+            return resolve(imgeEncoded);
+		})
+    } 
+
 
     return (
 
@@ -182,6 +210,20 @@ function UploadWorkspace() {
                     {formik.touched.price && formik.errors.price ? (
                         <div className="error">{formik.errors.price}</div>
                     ) : null}
+
+                    <label>Upload Image</label>
+                    <Input
+                        id="images"
+                        name="images"
+                        type="file"
+                        onChange={(e) => {
+                            //formik no soporta subida de ficheros
+                            console.log(e.target.files[0]);
+                            setFileInputState(e.target.files[0]);    
+                        }} 
+                        value={formik.values.images}
+                    />
+
                 </Stack>
 
                 <Button type="submit">Submit</Button>

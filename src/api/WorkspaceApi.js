@@ -43,11 +43,7 @@ export const postWorkspace = async (form) => {
     
     const req = await fetch(postUrl, {
       method: 'POST',
-      headers:{
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-      },
+      headers: {'Content-type':'application/json'},
       credentials: 'include',
       body: JSON.stringify(form),
    });
