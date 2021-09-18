@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 const BASE_URL = "http://localhost:3000/workspace";
 const postUrl = `${BASE_URL}/create`;
-const editUrl = `${BASE_URL}/edit`;
-const idUrl = `${BASE_URL}`;
+// const editUrl = `${BASE_URL}/edit`;
+// const idUrl = `${BASE_URL}`;
 
 export const getListWorkspace = async () => {
   const res = await fetch(BASE_URL, {
@@ -36,3 +36,26 @@ export const getWorkspaceById = async (id) => {
   return data;
   
 };
+
+export const postWorkspace = async (form) => {
+
+  try {
+    
+    const req = await fetch(postUrl, {
+      method: 'POST',
+      headers: {'Content-type':'application/json'},
+      credentials: 'include',
+      body: JSON.stringify(form),
+   });
+   const response = await req.json();
+
+   if(!req.ok){
+       throw new Error(response.message);
+   }
+   return response;
+
+  } catch (error) {
+    console.error(error);
+  }
+
+}
