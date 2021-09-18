@@ -171,10 +171,15 @@ function Header(props) {
                   <Flex alignItems="center" justifyContent="space-between" mx="auto">
 
                   {userContext.profileImage === "" &&
-                    <Avatar bg="teal.500" mr="3" />
+                   <Link as={ReachLink} to="/profile">
+
+                     <Avatar bg="teal.500" mr="3" />
+                   </Link>
                   }
                   {userContext.profileImage !== "" &&
-                    <Avatar size="sm" mr="3" src={userContext.profileImage} alt="https://bit.ly/broken-link" />
+                  <Link as={ReachLink} to="/profile">
+                    <Avatar focus="none" outline="none" size="sm" mr="3" src={userContext.profileImage} alt="https://bit.ly/broken-link" />
+                  </Link>
                   }
                   <Logout/>
 
