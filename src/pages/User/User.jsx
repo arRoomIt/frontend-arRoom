@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{useEffect} from 'react';
 
-import {Upload} from '../../components/sections'
+import {Upload} from '../../components/sections';
+
 
 function User() {
+
     return (
         <Upload/>
     )
