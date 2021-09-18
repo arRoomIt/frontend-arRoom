@@ -3,6 +3,7 @@ import React, {useContext} from 'react'
 import {Upload} from '../../components/sections'
 import {UserContext} from '../../auth/UserContext';
 import {VerticallyCenter} from '../../components/sections/Modal/ModalFilter';
+import {ModalWorkspace} from '../../components/sections/Modal/ModalWorkspace';
 
 import {
   chakra,
@@ -27,7 +28,8 @@ function User() {
 
     return (
         <div>
-
+            <ModalWorkspace />
+        
 
        <div>
     <Flex
@@ -126,7 +128,6 @@ function User() {
     </Flex>
         </div>
     <div>
-        
     </div>
   </div>
   );
