@@ -89,7 +89,7 @@ const Host = () => {
                     fontSize={{ base: "md", md: "lg" }}
                     rounded="md"
                     color="white"
-                    bg="brand.600"
+                    bg="teal.500"
                     _hover={{ bg: "brand.700" }}
                     px={{ base: 8, md: 10 }}
                     py={{ base: 3, md: 4 }}

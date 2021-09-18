@@ -4,6 +4,7 @@ import { Button, Box } from "@chakra-ui/react";
 
 import { logout } from '../../../api/auth.api';
 import { UserContext } from '../../../auth/UserContext';
+import { useHistory } from 'react-router-dom';
 
 const initialUser = {
     _id: "",
@@ -19,11 +20,14 @@ const initialUser = {
 
 function Logout() {
 
-    const [setUserContext] = useContext(UserContext);
+    const history = useHistory();
+
+    const [user,setUserContext] = useContext(UserContext);
     const logoutUser = () => {
         logout()
             .then(() =>{
-                setUserContext(initialUser)
+                setUserContext(initialUser);
+                history.push('/');
             })  
     }       
 

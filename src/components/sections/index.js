@@ -8,6 +8,7 @@ import Footer from './Footer';
 import Logout from './Logout/Logout';
 import CalendarDetail from './Calendar/Calendar'
 import Map from './Map/Map.jsx';
+import Upload from './Upload/Upload'
 
 export {
     Header,
@@ -19,5 +20,6 @@ export {
     Footer,
     Logout,
     CalendarDetail,
-    Map
+    Map,
+    Upload
 }

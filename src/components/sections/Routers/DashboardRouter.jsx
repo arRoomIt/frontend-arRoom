@@ -1,5 +1,5 @@
 import React from 'react'
-import { Home,ListWorkspace,DetailWorkspace } from '../../../pages/index';
+import { Home,ListWorkspace,DetailWorkspace,User } from '../../../pages/index';
 import{Header} from '..';
 import {  Switch, Route } from 'react-router-dom';
 
@@ -22,6 +22,10 @@ function DashboardRouter() {
 
         <Route path="/detail" component={DetailWorkspace}>
           <DetailWorkspace/>
+        </Route>
+
+        <Route path="/profile" component={User}>
+          <User/>
         </Route>
 
         <Route path="*">
