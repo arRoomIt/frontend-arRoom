@@ -6,7 +6,7 @@ import Card from './Card';
 import Paginacion from './Paginacion';
 import Footer from './Footer';
 import Logout from './Logout/Logout';
-
+import Upload from './Upload/Upload'
 
 export {
     Header,
@@ -16,5 +16,6 @@ export {
     Card,
     Paginacion,
     Footer,
-    Logout
+    Logout,
+    Upload
 }

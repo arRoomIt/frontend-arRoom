@@ -13,6 +13,7 @@ import {
   IconButton,
   VStack,
   CloseButton,
+  Avatar,
   useColorMode,
 } from "@chakra-ui/react";
 
@@ -166,7 +167,19 @@ function Header(props) {
             }
 
             {userContext._id !== "" &&
-                <Logout/>
+                <Box>
+                  <Flex alignItems="center" justifyContent="space-between" mx="auto">
+
+                  {userContext.profileImage === "" &&
+                    <Avatar bg="teal.500" mr="3" />
+                  }
+                  {userContext.profileImage !== "" &&
+                    <Avatar size="sm" mr="3" src={userContext.profileImage} alt="https://bit.ly/broken-link" />
+                  }
+                  <Logout/>
+
+                  </Flex>
+                </Box>
             }
 
             <IconButton
