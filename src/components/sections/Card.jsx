@@ -9,7 +9,7 @@ const Card = (props) => {
         title,
         price,
         totalOccupancy,
-        // images,
+        images,
         reviews
     } = props.workspace;
 

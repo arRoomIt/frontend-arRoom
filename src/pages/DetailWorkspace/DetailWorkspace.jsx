@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React from 'react';
-import {DetailLayout} from '../../components/layout';
-=======
 import React, { useState, useEffect } from 'react'
-import { Map } from '../../components/sections/Map/Map'
+import { Map, CalendarDetail } from '../../components/sections';
 import { getWorkspaceById } from  '../../api/WorkspaceApi'
 import { useLocation } from 'react-router-dom';
 import { Image, Box, Grid} from "@chakra-ui/react";
@@ -16,7 +12,6 @@ import { faHome, faUserFriends, faBookOpen, faDoorOpen, faFrown, faSmile, faMone
 // import Paper from '@mui/material/Paper';
 // import Typography from '@mui/material/Typography';
 // import ButtonBase from '@mui/material/ButtonBase';
->>>>>>> develop
 
 function DetailWorkspace() {
 
@@ -38,21 +33,17 @@ function DetailWorkspace() {
 
     
     useEffect(() => {
-
+    if(workSpaceId !== undefined){
     getWorkspaceById(workSpaceId).then(result => {
         setDetail(result);
-        setChange(false);
-        
+        setChange(false); 
     })
+}
 }, [change, workSpaceId]);
 
     
     
     return (
-<<<<<<< HEAD
-        
-        <DetailLayout/>
-=======
         <div>
         <div className="boxImage">
         <Box maxW="lg" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -88,8 +79,8 @@ function DetailWorkspace() {
           
 
             <Map />
+            <CalendarDetail/>
         </div>
->>>>>>> develop
     )
 }
 
