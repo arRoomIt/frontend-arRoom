@@ -45,7 +45,7 @@ function LoginForm(props) {
 
           const user = await loginApi(form);
           setUserContext(user);
-          history.push('/');
+          history.push('/profile');
 
 
         } catch (error) {

@@ -1,8 +1,12 @@
-import { Handler } from "leaflet";
-import React,{useState} from "react";
-import { useForm } from "react-hook-form";
+import React,{useState,useContext} from "react";
+
+import {uploadImage as uploadProfileImage} from '../../../api/user.api'
+import { UserContext } from '../../../auth/UserContext';
+
 
 function Upload() {
+
+    const [userContext,setUserContext] = useContext(UserContext);
 
     const [fileInputState, setFileInputState] = useState("");
 
@@ -29,8 +33,20 @@ function Upload() {
 
     const uploadImage = (base64EncodedImage) => {
         try {
-            console.log(base64EncodedImage);
-            // await fetch() --> llamar a la api
+
+            if(userContext._id === "" ){
+                throw new Error("No hay id de usuario")
+            }
+            const form = {
+                userId: userContext._id,
+                image: base64EncodedImage
+            }
+            console.log("upload--->",userContext);
+            uploadProfileImage(form)
+                .then((result)=>{
+                    setUserContext(result)
+                })
+                .catch((error) => {console.error(error)})
         } catch (error) {
             console.error(error);
         }
