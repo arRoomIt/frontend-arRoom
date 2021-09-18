@@ -4,14 +4,37 @@
 }
 .boxText {
     margin-top: 15px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid ;
-    border-top: 2px solid ;
+    margin-bottom: 15px;   
 }
+
+li {
+    list-style: none;
+}
+
+.btitle {
+    border-bottom: 0.2px solid;
+    padding-bottom: 25px;
+    
+}
+
+.bone {
+    margin-bottom: 10px;
+}
+
+
+.btop, .bsummary {
+    margin-top: 25px;
+}
+
+.bsummary {
+    border-top: 0.2px solid;
+    margin-bottom: 25px;
+    padding-top: 20px;
+}
+
 .size{
     font-size: 150%;
 }
-
 
 .green{
     color: green;
@@ -19,4 +42,35 @@
 
 .red{
     color: red;
+}
+
+
+@media screen and (min-width: 980px) {
+    .row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      
+    }
+  }
+
+.col {
+    flex-basis: 100%;
+    margin-left: 150px;
+    margin-right: 50px;
+}
+
+
+@media screen and (min-width: 980px) { 
+    .col {
+      flex: 1;
+      
+    }
+}
+
+@media (max-width: 640px) {
+    .col {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }

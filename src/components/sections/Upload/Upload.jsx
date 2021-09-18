@@ -2,7 +2,8 @@ import React,{useState,useContext} from "react";
 
 import {uploadImage as uploadProfileImage} from '../../../api/user.api'
 import { UserContext } from '../../../auth/UserContext';
-
+import './Upload.css';
+import { Flex, Center, Text } from "@chakra-ui/react";
 
 function Upload() {
 
@@ -53,17 +54,23 @@ function Upload() {
     }
   
     return (
-      <div className="FileUpload">
-        <form onSubmit={handleSubmitFile}>
-            <input type="file" name="image" 
-                onChange={handleFileInput} 
-                value={fileInputState} />
-            <button type="submit">Submit</button>
-        </form>
-        {previewSource && 
-            <img src={previewSource} alt="" style={{height:"300px"}}/>
-        }
-      </div>
+      <Flex >
+        
+      <Center w="70%" ml="12" borderRadius="15px">
+        <Text><div className="FileUpload">
+            <form onSubmit={handleSubmitFile}>
+                <input className="binput" type="file" name="image" 
+                    onChange={handleFileInput} 
+                    value={fileInputState} />
+            {previewSource && 
+                <img className="bimage" src={previewSource} alt="" style={{width:"250px", height:"250px"}}/>
+            }
+                <button  className="binput__sub" type="submit">Submit</button>
+            </form> 
+        </div>
+        </Text>
+    </Center>
+      </Flex>
     );
   };
 

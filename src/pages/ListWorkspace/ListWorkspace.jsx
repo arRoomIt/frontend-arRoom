@@ -6,7 +6,7 @@ function ListWorkspace() {
    
     return (
         <>
-            <VerticallyCenter />
+        
             <ListLayout/>
         </>
     )

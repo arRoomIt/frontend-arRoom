@@ -1,7 +1,8 @@
 import React from "react";
 import './ModalFilter.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortAmountDownAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import Upload from '../../sections/Upload/Upload';
 import {
     Button,
     useDisclosure,
@@ -25,7 +26,7 @@ function VerticallyCenter() {
   return (
     <div className="modal">
       <Button onClick={onOpen}>
-        <FontAwesomeIcon icon={faSortAmountDownAlt} />
+        <FontAwesomeIcon icon={faUserCircle} />
       </Button>
 
       <Modal
@@ -33,16 +34,16 @@ function VerticallyCenter() {
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
-      >
+        >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal de los cojones</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-           
+        <Upload />
+          
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>Cierra que se escapa el gato</Button>
+          <Button onClick={onClose}>Cancelar</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
