@@ -9,7 +9,7 @@ const logoutUrl = `${BASE_URL}/logout`;
 
 
 export const registerApi = async (form) => {
-    console.log(form);
+
     const req = await fetch(registerUrl, {
        method: 'POST',
        headers:{

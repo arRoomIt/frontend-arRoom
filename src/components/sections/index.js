@@ -9,6 +9,7 @@ import Logout from './Logout/Logout';
 import CalendarDetail from './Calendar/Calendar'
 import Map from './Map/Map.jsx';
 import Upload from './Upload/Upload'
+import UploadWorkspace from './Upload/UploadWorkspace/UploadWorkspace';
 
 export {
     Header,
@@ -21,5 +22,6 @@ export {
     Logout,
     CalendarDetail,
     Map,
+    UploadWorkspace,
     Upload
 }
