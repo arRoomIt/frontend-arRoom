@@ -1,35 +1,33 @@
 import React from 'react'
-import { Login,Register } from '../../../pages/index';
-import{DashboardRouter} from '../Routers/DashboardRouter';
+import { Login, Register } from '../../../pages/index';
+import { DashboardRouter } from '../Routers/DashboardRouter';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function AppRouter() {
-    return (
-        <Router>
-            
+  return (
+    <Router>
 
-        <Switch>
-        
-        
+
+      <Switch>
 
         <Route path="/login" component={Login}>
-          <Login/>
+          <Login />
         </Route>
 
         <Route path="/register" component={Register}>
-          <Register/>
+          <Register />
         </Route>
 
         <Route path="/" component={DashboardRouter}>
-          <DashboardRouter/>
+          <DashboardRouter />
         </Route>
-        
 
-        
+
+
       </Switch>
 
     </Router>
-    )
+  )
 }
 
 export default AppRouter;
