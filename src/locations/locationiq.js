@@ -21,7 +21,7 @@ const locationiq = async (direction) => {
 
        const mapData = {
            latitude: response[0].lat,
-           longitud: response[0].lon,
+           longitude: response[0].lon,
        }
        return mapData;
        

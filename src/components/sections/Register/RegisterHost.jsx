@@ -1,5 +1,4 @@
 import { Button, InputGroup, InputRightElement, FormLabel, Input,Text, Stack } from '@chakra-ui/react'
-import { PasswordField } from './PasswordField'
 
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom';

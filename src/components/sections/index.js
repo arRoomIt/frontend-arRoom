@@ -7,6 +7,7 @@ import Paginacion from './Paginacion';
 import Footer from './Footer';
 import Logout from './Logout/Logout';
 import Upload from './Upload/Upload'
+import UploadWorkspace from './Upload/UploadWorkspace/UploadWorkspace';
 
 export {
     Header,
@@ -17,5 +18,6 @@ export {
     Paginacion,
     Footer,
     Logout,
+    UploadWorkspace,
     Upload
 }
