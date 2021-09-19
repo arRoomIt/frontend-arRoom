@@ -5,8 +5,11 @@ import {
   Input,
   useToast,
   InputGroup,
+  IconButton,
   Text
 } from '@chakra-ui/react'
+
+import { HiEye, HiEyeOff } from 'react-icons/hi'
 
 import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
@@ -156,16 +159,19 @@ function RgisterUser(props) {
             id="password"
             name="password"
             type={show ? "text" : "password"}
-            placeholder="**********"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}
           />
 
-          <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={showPass}>
-              {show ? "Hide" : "Show"}
-            </Button>
+          <InputRightElement>
+            <IconButton
+              bg="transparent !important"
+              variant="ghost"
+              aria-label={show ? 'Mask password' : 'Reveal password'}
+              icon={show ? <HiEyeOff /> : <HiEye />}
+              onClick={showPass}
+            />
           </InputRightElement>
 
         </InputGroup>
@@ -185,7 +191,7 @@ function RgisterUser(props) {
         {formik.touched.repassword && formik.errors.repassword ? (
           <Text color="tomato" className="error">{formik.errors.repassword}</Text >
         ) : null}
-
+        <FormLabel>Image Profile</FormLabel>
         <Input
           id="image"
           name="image"

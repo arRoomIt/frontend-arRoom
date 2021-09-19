@@ -3,6 +3,7 @@ import { Link as ReachLink } from "react-router-dom";
 import {
   chakra,
   Flex,
+  Icon,
   HStack,
   Link,
   Button,
@@ -74,7 +75,6 @@ function Header(props) {
           Workspaces
         </Button>
       </Link>
-      {/* //TODO:AGREGAR RUTA */}
       <Link as={ReachLink} to="/">
         <Button
           w="full"
@@ -93,7 +93,17 @@ function Header(props) {
       <chakra.header h="full" bg={bg} w="full" px={{ base: 2, sm: 4 }} py={4}>
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
           <Link display="flex" alignItems="center" as={ReachLink} to="/">
-            <Logo />
+            <Icon
+              boxSize={6}
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <img src="src\assets\logo3.svg" alt="" />
+            </Icon>
           </Link>
           <Box display={{ base: "none", md: "inline-flex" }}>
             <HStack spacing={1}>
@@ -134,17 +144,6 @@ function Header(props) {
                   Workspaces
                 </Button>
               </Link>
-              <Button
-                bg={bg}
-                color="gray.500"
-                display="inline-flex"
-                alignItems="center"
-                fontSize="md"
-                _hover={{ color: cl }}
-                _focus={{ boxShadow: "none" }}
-              >
-
-              </Button>
             </HStack>
           </Box>
           <Spacer />
@@ -167,24 +166,24 @@ function Header(props) {
             }
 
             {userContext._id !== "" &&
-                <Box>
-                  <Flex alignItems="center" justifyContent="space-between" mx="auto">
+              <Box>
+                <Flex alignItems="center" justifyContent="space-between" mx="auto">
 
                   {userContext.profileImage === "" &&
-                   <Link as={ReachLink} to="/profile">
+                    <Link as={ReachLink} to="/profile">
 
-                     <Avatar bg="teal.500" mr="3" />
-                   </Link>
+                      <Avatar bg="teal.500" mr="3" />
+                    </Link>
                   }
                   {userContext.profileImage !== "" &&
-                  <Link as={ReachLink} to="/profile">
-                    <Avatar focus="none" outline="none" size="sm" mr="3" src={userContext.profileImage} alt="https://bit.ly/broken-link" />
-                  </Link>
+                    <Link as={ReachLink} to="/profile">
+                      <Avatar focus="none" outline="none" size="sm" mr="3" src={userContext.profileImage} alt="https://bit.ly/broken-link" />
+                    </Link>
                   }
-                  <Logout/>
+                  <Logout />
 
-                  </Flex>
-                </Box>
+                </Flex>
+              </Box>
             }
 
             <IconButton
