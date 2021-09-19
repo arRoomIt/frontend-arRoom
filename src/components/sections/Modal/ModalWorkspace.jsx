@@ -1,7 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { BsUpload } from "react-icons/bs";
 import './ModalWorkspace.css';
+import UploadWorkspace from '../Upload/UploadWorkspace/UploadWorkspace'
 import {
     Button,
     useDisclosure,
@@ -25,7 +27,7 @@ function ModalWorkspace() {
   return (
     <div className="bmodal">
       <Button onClick={onOpen}>
-        <FontAwesomeIcon icon={faUserCircle} />
+        <FontAwesomeIcon icon={faUpload} />
       </Button>
 
       <Modal
@@ -37,9 +39,11 @@ function ModalWorkspace() {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
-          <ModalBody>
           
-          </ModalBody>
+
+          <UploadWorkspace />
+          
+          
           <ModalFooter>
           <Button onClick={onClose}>Cancelar</Button>
           </ModalFooter>
