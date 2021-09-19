@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 
 import { Card } from '../../../pages/Login/Card'
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
@@ -12,7 +12,11 @@ import {
 } from "@chakra-ui/react"
 import { postReservation } from '../../../api/reservation.api';
 
+import {UserContext} from '../../../auth/UserContext'
+
 function Reserve(props) {
+
+    const [user,setUserContext] = useContext(UserContext);
 
     const toast = useToast()
     const [incorrectToast, setIncorrectToast] = useState(false);
@@ -63,22 +67,25 @@ function Reserve(props) {
         }
     }
 
-    const createReservation = () => {
-        const newReservations = {
-            start: startDay,
-            end: endDay,
-            price: totalPrice,
-            workspaceId: detail._id,
-        }
-        postReservation(newReservations)
-            .then((result) => {
-                console.log(result);
-                setSucess(true);
-            })
-            .catch(err => {
-                console.log(err)
-            })
 
+    const createReservation = async() => {
+
+        try {
+            const newReservations = {
+                start: startDay,
+                end: endDay,
+                price: totalPrice,
+                workspaceId: detail._id,
+            }
+            if(user._id === "") throw new Error("Usuario no logueado")
+
+            await postReservation(newReservations)
+            setSucess(true);
+    
+        } catch (error) {
+            console.error(error);
+            setIncorrectToast(true);
+        }
     }
 
     useEffect(() => {
@@ -99,7 +106,7 @@ function Reserve(props) {
 
             {incorrectToast &&
                 toast({
-                    title: "Failed to reserve 😔",
+                    title: user._id !== ""? "Failed to reserve 😔": "Please login before reserve 😒",
                     status: "error",
                     position: "top",
                     duration: 3000,
@@ -110,7 +117,7 @@ function Reserve(props) {
             {sucess &&
                 toast({
                     position: "top",
-                    title: "You have the control of the workspace 😎",
+                    title: "Reserve successfully! 😎",
                     description: 'Remenber: with great power comes great responsibility!',
                     status: "success",
                     duration: 6000,

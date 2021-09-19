@@ -45,10 +45,8 @@ const Hero = () => {
           mb={6}
           fontSize={{ base: "lg", md: "xl" }}
           color={useColorModeValue("gray.600",'gray.300')}
-        >
-          Hello next is a feature voting software where you can allow your users
-          to vote on features, publish roadmap, and complete your customer
-          feedback loop.
+        >  
+        Coworking space designed for the IT community and private offices for companies.
         </chakra.p>
         <Stack
         direction={{base:"column",sm:"row"}}

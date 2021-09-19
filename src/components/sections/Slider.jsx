@@ -5,17 +5,15 @@ const Slider = () => {
   const slides = [
     {
       img:
-        "https://cdn.pixabay.com/photo/2017/08/23/16/03/io-centers-2673317__340.jpg",
-        
-    
+        "https://www.incimages.com/uploaded_files/image/1920x1080/getty_517610514_353435.jpg",    
     },
     {
       img:
-        "https://cdn.pixabay.com/photo/2020/04/30/23/28/people-5114920__340.jpg",
+        "https://spacestor.com/media/scaled_images/160120-084753_medium.jpg",
     },
     {
       img:
-        "https://cdn.pixabay.com/photo/2021/03/18/19/49/home-office-6105736__340.jpg",
+        "https://images.squarespace-cdn.com/content/v1/57333f3b044262e0b7ab43a3/1591797552694-7FMLLXF7Y6DZ17J2E3C6/4.jpg?format=1000w",
     },
     {
       img:
@@ -59,7 +57,12 @@ const Slider = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Flex w="90%" overflow="hidden">
+      <Flex w={[
+            "100%", // 0-30em
+            "100%", // 30em-48em
+            "85%", // 48em-62em
+            "60%", // 62em+
+          ]} overflow="hidden">
         <Flex pos="relative" h="400px" w="full" {...carouselStyle}>
           {slides.map((slide, sid) => (
             <Box key={`slide-${sid}`} flex="none" boxSize="full" shadow="md">

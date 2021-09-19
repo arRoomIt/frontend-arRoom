@@ -69,7 +69,7 @@ const Host = () => {
                 mx={{ sm: "auto", lg: 0 }}
                 color="gray.500"
               >
-                Join with us, and gana money alquilando your space.
+                Join with us, and moke money hosting your space.
               </chakra.p>
               <Box
                 mt={{ base: 5, sm: 8 }}
