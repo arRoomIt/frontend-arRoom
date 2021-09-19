@@ -1,7 +1,7 @@
-import { Button, chakra, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react'
+import { Button, chakra, FormControl, FormLabel, Input, Stack,useToast,Box  } from '@chakra-ui/react'
 import { PasswordField } from './PasswordField'
 
-import React , { useState,useContext } from 'react'
+import React , { useState,useContext,useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 
 import { loginApi } from '../../api/auth.api';
@@ -20,6 +20,18 @@ function LoginForm(props) {
 
   const [userContext,setUserContext] = useContext(UserContext);
 
+  const toast = useToast()
+  const [incorrectToast, setIncorrectToast] = useState(false);
+  const [sucess, setSucess] = useState(false);
+
+  useEffect(() => {
+    setIncorrectToast(false);
+  },[incorrectToast]);
+
+  useEffect(() => {
+    setSucess(false)
+  },[sucess]);
+
 
   const [state, setState] = useState(INITIAL_STATE);
   // const [rest,setReset] = useState(false);
@@ -32,7 +44,30 @@ function LoginForm(props) {
 
   return (
 
-    <chakra.form
+    <div>
+      
+      {incorrectToast && 
+        toast({
+          title: "Failed to sign in",
+          description: "Incorrect email o password 😦",
+          status: "error",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+
+      {sucess && 
+        toast({
+          position: "top",
+          title: "Welcome Back! 🥰",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+
+      <chakra.form
       onSubmit={async (e) => {
         e.preventDefault();
 
@@ -44,12 +79,13 @@ function LoginForm(props) {
           }
 
           const user = await loginApi(form);
+          setSucess(true);
           setUserContext(user);
           history.push('/');
 
-
         } catch (error) {
           console.log(error);
+          setIncorrectToast(true);
         }
 
 
@@ -73,6 +109,7 @@ function LoginForm(props) {
         </Button>
       </Stack>
     </chakra.form>
+    </div>
 
   )
 }

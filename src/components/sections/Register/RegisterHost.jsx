@@ -1,6 +1,15 @@
-import { Button, InputGroup, InputRightElement, FormLabel, Input,Text, Stack } from '@chakra-ui/react'
+import {
+  Button,
+  InputGroup,
+  InputRightElement,
+  FormLabel,
+  Input,
+  Text,
+  Stack,
+  useToast
+} from '@chakra-ui/react'
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 
 import { useFormik } from "formik";
@@ -13,9 +22,21 @@ import './RgisterUser.scss';
 
 function RegisterHost(props) {
 
+  const toast = useToast()
+  const [sucessToast, setSucessToast] = useState(false);
+  const [errorToast, setErrorTost] = useState(false);
+
+  useEffect(() => {
+    setSucessToast(false);
+  }, [sucessToast])
+
+  useEffect(() => {
+    setErrorTost(false);
+  },[errorToast])
+
   const history = useHistory();
 
-  const [user,setUserContext] = useContext(UserContext);
+  const [user, setUserContext] = useContext(UserContext);
 
   const [show, setShow] = useState(false)
   const showPass = () => setShow(!show)
@@ -23,14 +44,13 @@ function RegisterHost(props) {
   const validate = (values) => {
     const errors = {};
 
-    if(!values.name){
+    if (!values.name) {
       errors.name = "Required";
     }
 
     if (!values.email) {
       errors.email = "Required";
     } else {
-      console.error("Hola???")
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       const test = re.test(String(values.email).toLowerCase());
       if (!test) {
@@ -40,7 +60,7 @@ function RegisterHost(props) {
 
     if (!values.password) {
       errors.password = "Required";
-    }else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/i.test(values.password)){
+    } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/i.test(values.password)) {
       errors.password = "Minimum contain 8 characters, at least 1 letter and 1 number:";
     }
 
@@ -50,7 +70,7 @@ function RegisterHost(props) {
       errors.repassword = "Second password doesn't match";
     }
 
-    if(!values.phoneNumber){
+    if (!values.phoneNumber) {
       errors.phoneNumber = "Required";
     }
 
@@ -64,7 +84,7 @@ function RegisterHost(props) {
       email: "",
       password: "",
       repassword: "",
-      phoneNumber:"",
+      phoneNumber: "",
       image: "",
       isHost: true,
     },
@@ -72,21 +92,49 @@ function RegisterHost(props) {
     onSubmit: (values) => {
       //alert(JSON.stringify(values, null, 2));
       registerApi(values)
-        .then((data)=>{
-            setUserContext(data);
-            history.push('/');
+        .then((data) => {
+          setSucessToast(true);
+          setUserContext(data);
+          history.push('/');
 
         })
-        .catch(error => console.log(error));
-
+        .catch(error => {
+          setErrorTost(true);
+          console.log(error);
+        });
     },
   });
 
   return (
     <div>
+
+      {sucessToast &&
+        toast({
+          title: "You are a host now, dont tell anyone!🤫",
+          description: "Account created.",
+          status: "success",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+
+      {errorToast &&
+        toast({
+          title: "We had an error!😱",
+          description: "Maybe someone else registered with your account?",
+          status: "error",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+
+
+
       <form onSubmit={formik.handleSubmit}>
 
-      <FormLabel>Name</FormLabel>
+        <FormLabel>Name</FormLabel>
         <Input
           id="nameHost"
           name="name"

@@ -1,6 +1,14 @@
-import { Button, InputRightElement, FormLabel, Input, Stack,InputGroup,Text } from '@chakra-ui/react'
+import {
+  Button,
+  InputRightElement,
+  FormLabel,
+  Input,
+  useToast,
+  InputGroup,
+  Text
+} from '@chakra-ui/react'
 
-import React , { useState,useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 
 import { useFormik } from "formik";
@@ -12,17 +20,29 @@ import './RgisterUser.scss';
 
 function RgisterUser(props) {
 
-  const [show, setShow] = useState(false)
-  const showPass = () => setShow(!show)
-  
+  const toast = useToast()
+  const [sucess, setSucess] = useState(false);
+  const [errorToast, setErrorTost] = useState(false);
+  useEffect(() => {
+    setSucess(false);
+  }, [sucess])
+
+  useEffect(() => {
+    setErrorTost(false);
+  }, [errorToast])
+
+  const [show, setShow] = useState(false);
+  const showPass = () => setShow(!show);
+
   const history = useHistory();
-  const [user,setUserContext] = useContext(UserContext);
+  const [user, setUserContext] = useContext(UserContext);
+
 
   const validate = (values) => {
 
     const errors = {};
 
-    if(!values.name){
+    if (!values.name) {
       errors.name = "Required";
     }
 
@@ -31,14 +51,14 @@ function RgisterUser(props) {
     } else {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       const test = re.test(String(values.email).toLowerCase());
-      if(!test){
+      if (!test) {
         errors.email = "It's not a valid email";
       }
     }
 
     if (!values.password) {
       errors.password = "Required";
-    }else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/i.test(values.password)){
+    } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/i.test(values.password)) {
       errors.password = "Minimum contain 8 characters, at least 1 letter and 1 number:";
     }
 
@@ -54,29 +74,57 @@ function RgisterUser(props) {
 
   const formik = useFormik({
     initialValues: {
-      name:"",
+      name: "",
       email: "",
       password: "",
       repassword: "",
-      image:"",
+      image: "",
       isHost: false,
     },
     validate,
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       registerApi(values)
-        .then((data) =>{
+        .then((data) => {
+          setSucess(true);
           setUserContext(data);
           history.push('/');
+        })
+        .catch((error) => {
+          setErrorTost(true);
+          console.error(error);
         })
     },
   });
 
-    return (
-      <div>
-      <form  onSubmit={formik.handleSubmit}>
+  return (
+    <div>
 
-      <FormLabel>Name</FormLabel>
+      {sucess &&
+        toast({
+          title: "Welcomer to our family!🥳",
+          description: "Account created.",
+          status: "success",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+
+      {errorToast &&
+        toast({
+          title: "We had an error!😱",
+          description: "Maybe someone else registered with your account?",
+          status: "error",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+
+      <form onSubmit={formik.handleSubmit}>
+
+        <FormLabel>Name</FormLabel>
         <Input
           id="nameHost"
           name="name"
@@ -114,11 +162,11 @@ function RgisterUser(props) {
             value={formik.values.password}
           />
 
-        <InputRightElement width="4.5rem">
+          <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={showPass}>
               {show ? "Hide" : "Show"}
             </Button>
-        </InputRightElement>
+          </InputRightElement>
 
         </InputGroup>
         {formik.touched.password && formik.errors.password ? (
@@ -146,12 +194,12 @@ function RgisterUser(props) {
           onBlur={formik.handleBlur}
           value={formik.values.image}
         />
-          <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
-            Sign Up
-          </Button>
+        <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
+          Sign Up
+        </Button>
       </form >
     </div>
-    )
+  )
 }
 
 export default RgisterUser

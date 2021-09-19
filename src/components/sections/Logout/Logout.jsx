@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState } from 'react'
 
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box,useToast } from "@chakra-ui/react";
 
 import { logout } from '../../../api/auth.api';
 import { UserContext } from '../../../auth/UserContext';
@@ -22,8 +22,11 @@ function Logout() {
 
     const history = useHistory();
 
+    const toast = useToast()
+    const [sucessLogout,setSucessLogout] = useState();
+
     const [user,setUserContext] = useContext(UserContext);
-    const logoutUser = () => {
+    const logoutUser = (e) => {
         logout()
             .then(() =>{
                 setUserContext(initialUser);
@@ -32,12 +35,25 @@ function Logout() {
     }       
 
     return (
+
+
+
         <Box>
             <Button 
                 colorScheme="red" 
                 variant="outline" 
                 size="sm"
-                onClick={logoutUser}
+                onClick={(e)=>{
+                    logoutUser(e);
+                    toast({
+                        title: "See you later👋",
+                        description: "Have a good day",
+                        status: "info",
+                        position: "top",
+                        duration: 3000,
+                        isClosable: true,
+                    })
+                }}
                 >
                     Logout
             </Button>
