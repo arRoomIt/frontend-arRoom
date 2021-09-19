@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { useFormik } from "formik";
-import { Button, InputGroup, InputRightElement, FormLabel, Input, Text, Stack,useColorModeValue,Box } from '@chakra-ui/react'
+import { Button, InputGroup, InputRightElement, FormLabel, Input, Text, Stack,useColorModeValue,Box, Checkbox } from '@chakra-ui/react'
 
 import { Card } from '../../../../pages/Login/Card'
 import { postWorkspace } from '../../../../api/WorkspaceApi';
@@ -20,9 +20,9 @@ function UploadWorkspace() {
         if (!values.direction) errors.direction = "Required";
         if (!values.roomType) errors.roomType = "Required";
         if (!values.totalOccupancy) errors.totalOccupancy = "Required";
-        if (!values.hasAirCon) errors.hasAirCon = "Required";
-        if (!values.hasAirHeating) errors.hasAirHeating = "Required";
-        if (!values.hasInternet) errors.hasInternet = "Required";
+        // if (!values.hasAirCon) errors.hasAirCon = "Required";
+        // if (!values.hasAirHeating) errors.hasAirHeating = "Required";
+        // if (!values.hasInternet) errors.hasInternet = "Required";
         if (!values.price) errors.price = "Required";
 
         return errors;
@@ -37,9 +37,9 @@ function UploadWorkspace() {
             direction: "",
             roomType: "",
             totalOccupancy: "",
-            hasAirCon: "",
-            hasAirHeating: "",
-            hasInternet: "",
+            hasAirCon: "false",
+            hasAirHeating: "false",
+            hasInternet: "false",
             price: "",
             images:"",
             publishedAt: new Date(),
@@ -83,13 +83,13 @@ function UploadWorkspace() {
 
     return (
 
-        <Box
-            bg={useColorModeValue('gray.50', 'inherit')}
-            minH="100vh"
-            py="12"
-            px={{ base: '4', lg: '8' }}
-        >
-            <Box maxW="md" mx="auto">
+        // <Box
+        //     bg={useColorModeValue('gray.50', 'inherit')}
+        //     minH="100vh"
+        //     py="12"
+        //     px={{ base: '4', lg: '8' }}
+        // >
+        //     <Box maxW="md" mx="auto">
 
         <Card>
             <h1>Upload workspace</h1>
@@ -160,40 +160,47 @@ function UploadWorkspace() {
                         <div className="error">{formik.errors.totalOccupancy}</div>
                     ) : null}
 
-                    <label>hasAirCon</label>
-                    <Input
+                    
+                    <Checkbox
                         id="hasAirCon"
                         name="hasAirCon"
                         type="text"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.hasAirCon}
-                    />
+                    >
+                    hasAirCon
+                    </Checkbox>
                     {formik.touched.hasAirCon && formik.errors.hasAirCon ? (
                         <div className="error">{formik.errors.hasAirCon}</div>
                     ) : null}
 
-                    <label>hasAirHeating</label>
-                    <Input
+                   
+                    <Checkbox
                         id="hasAirHeating"
                         name="hasAirHeating"
                         type="text"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.hasAirHeating}
-                    />
+                    >
+                    hasAirHeating
+                    </Checkbox>
                     {formik.touched.hasAirHeating && formik.errors.hasAirHeating ? (
                         <div className="error">{formik.errors.hasAirHeating}</div>
                     ) : null}
-                    <label>hasInternet</label>
-                    <Input
-                        id="hasInternet"
-                        name="hasInternet"
-                        type="text"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.hasInternet}
-                    />
+                
+                 
+                    <Checkbox
+                       id="hasInternet"
+                       name="hasInternet"
+                       type="text"
+                       onChange={formik.handleChange}
+                       onBlur={formik.handleBlur}
+                       value={formik.values.hasInternet}
+                    >
+                    hasInternet
+                    </Checkbox>
                     {formik.touched.hasInternet && formik.errors.hasInternet ? (
                         <div className="error">{formik.errors.hasInternet}</div>
                     ) : null}
@@ -229,8 +236,8 @@ function UploadWorkspace() {
                 <Button type="submit">Submit</Button>
             </form>
         </Card>
-        </Box>
-        </Box>
+        // </Box>
+        // </Box>
     );
 }
 
