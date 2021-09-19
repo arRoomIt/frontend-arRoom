@@ -7,21 +7,36 @@ import {
     Text,
     Box,
     Button,
+    useToast,
     Flex,
 } from "@chakra-ui/react"
 import { postReservation } from '../../../api/reservation.api';
 
 function Reserve(props) {
 
+    const toast = useToast()
+    const [incorrectToast, setIncorrectToast] = useState(false);
+    const [sucess, setSucess] = useState(false);
+
+
+    useEffect(() => {
+        setIncorrectToast(false);
+    }, [incorrectToast]);
+
+    useEffect(() => {
+        setSucess(false)
+    }, [sucess]);
+
+
     const detail = props.detail;
     if (detail.reviews === undefined) detail.reviews = [];
 
     //precio total
-    const [totalPrice,setTotalPrice] = useState("0");
+    const [totalPrice, setTotalPrice] = useState("0");
 
     useEffect(() => {
         setTotalPrice(detail.price);
-    },[detail])
+    }, [detail])
 
 
     //guardar fechas
@@ -50,16 +65,17 @@ function Reserve(props) {
 
     const createReservation = () => {
         const newReservations = {
-            start:startDay,
-            end:endDay,
-            price:totalPrice,
-            workspaceId:detail._id,
+            start: startDay,
+            end: endDay,
+            price: totalPrice,
+            workspaceId: detail._id,
         }
         postReservation(newReservations)
-            .then((result) =>{
+            .then((result) => {
                 console.log(result);
+                setSucess(true);
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log(err)
             })
 
@@ -75,50 +91,76 @@ function Reserve(props) {
     useEffect(() => {
         const num = totalDays * detail.price;
         setTotalPrice(num + detail.price);
-    },[totalDays])
+    }, [totalDays])
 
 
     return (
-        <Card mt="2">
-            <Flex justify="center"direction="column" align="center">
-                <Text fontSize="2xl">Add dates for total prices</Text>
-                <Box mt="2" d="flex" mt="2" alignItems="center">
-                    <Box as="span" ml="2" color="gray.600" fontSize="sm">
-                        {detail.reviews.length} reviews
+        <div>
+
+            {incorrectToast &&
+                toast({
+                    title: "Failed to reserve 😔",
+                    status: "error",
+                    position: "top",
+                    duration: 3000,
+                    isClosable: true,
+                })
+            }
+
+            {sucess &&
+                toast({
+                    position: "top",
+                    title: "You have the control of the workspace 😎",
+                    description: 'Remenber: with great power comes great responsibility!',
+                    status: "success",
+                    duration: 6000,
+                    isClosable: true,
+                })
+            }
+
+
+
+            <Card mt="2">
+                <Flex justify="center" direction="column" align="center">
+                    <Text fontSize="2xl">Add dates for total prices</Text>
+                    <Box mt="2" d="flex" mt="2" alignItems="center">
+                        <Box as="span" ml="2" color="gray.600" fontSize="sm">
+                            {detail.reviews.length} reviews
+                        </Box>
                     </Box>
-                </Box>
-                <Box mt="2">
-                    <DateRangePicker
-                        onChange={(e) => { onChangeDate(e) }}
-                        value={value}
-                        minDate={minDate}
-                        maxDate={maxDate}
-                    />
+                    <Box mt="2">
+                        <DateRangePicker
+                            onChange={(e) => { onChangeDate(e) }}
+                            value={value}
+                            minDate={minDate}
+                            maxDate={maxDate}
+                        />
 
-                </Box>
+                    </Box>
 
-                <Box mt="8">
-                    <Text
-                        mb={2}
-                        fontSize="xl"
-                        fontWeight={["bold",]}
-                        lineHeight="tight"
-                    >
-                        Total: {totalPrice !== NaN && 
-                            `${totalPrice}`
-                        } €
-                    </Text>
-                </Box>
+                    <Box mt="8">
+                        <Text
+                            mb={2}
+                            fontSize="xl"
+                            fontWeight={["bold",]}
+                            lineHeight="tight"
+                        >
+                            Total: {totalPrice !== NaN &&
+                                `${totalPrice}`
+                            } €
+                        </Text>
+                    </Box>
 
-                <Box mt="3" >
-                    <Button 
-                        colorScheme="teal" 
-                        onClick={createReservation}    
-                    >Reserve Now!</Button>
-                </Box>
-            </Flex>
+                    <Box mt="3" >
+                        <Button
+                            colorScheme="teal"
+                            onClick={createReservation}
+                        >Reserve Now!</Button>
+                    </Box>
+                </Flex>
 
-        </Card>
+            </Card>
+        </div>
     )
 }
 
