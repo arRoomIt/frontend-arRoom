@@ -10,6 +10,8 @@ import CalendarDetail from './Calendar/Calendar'
 import Map from './Map/Map.jsx';
 import Upload from './Upload/Upload'
 import UploadWorkspace from './Upload/UploadWorkspace/UploadWorkspace';
+import Reserve from './Reserve/Reserve';
+
 
 export {
     Header,
@@ -23,5 +25,6 @@ export {
     CalendarDetail,
     Map,
     UploadWorkspace,
-    Upload
+    Upload,
+    Reserve
 }

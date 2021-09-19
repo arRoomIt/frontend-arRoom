@@ -1,16 +1,18 @@
 import React from 'react';
-import {CalendarDetail} from '../..//sections';
-import { Map } from '../../sections';
+import { Map,CalendarDetail } from '../../sections';
 import {Box} from "@chakra-ui/react"
-
+//TODO: esta funcion no esta siendo usado
 function DetailLayout() {
     return (
         <>
-            <Map/> 
+            <h1>Hopla</h1>
+            {/* <Map/>  */}
             <CalendarDetail />
         </>
 
-    )
+)
 }
 
 export default DetailLayout
+
+// <CalendarDetail /> 

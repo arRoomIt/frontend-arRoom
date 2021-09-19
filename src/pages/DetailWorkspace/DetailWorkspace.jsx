@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Map, CalendarDetail } from '../../components/sections';
+import { Map, CalendarDetail,Reserve } from '../../components/sections';
 import { getWorkspaceById } from  '../../api/WorkspaceApi'
 import { useLocation } from 'react-router-dom';
 import { Image, Box, Grid} from "@chakra-ui/react";
 import './DetailWorkspace.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUserFriends, faBookOpen, faDoorOpen, faFrown, faSmile, faMoneyBillWave, faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
-// import * as React from 'react';
-// import { styled } from '@mui/material/styles';
-// import Grid from '@mui/material/Grid';
-// import Paper from '@mui/material/Paper';
-// import Typography from '@mui/material/Typography';
-// import ButtonBase from '@mui/material/ButtonBase';
+
 
 function DetailWorkspace() {
 
@@ -76,14 +71,15 @@ function DetailWorkspace() {
         
         </div>
         <div class="col">
-                <h1>Botón?????</h1>
+                {/* <h1>Botón?????</h1> */}
+                <Reserve detail={detail}/>
             </div>
         </div>
         
     </div>
           </Grid>
             <Map />
-            <CalendarDetail/>
+            {/* <CalendarDetail/> */}
     </div>
     
     )
