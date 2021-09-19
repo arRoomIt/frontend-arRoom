@@ -1,0 +1,22 @@
+.binput {
+    border-radius: 15px;
+    background-color: teal;
+    width: 100%;
+    
+}
+
+
+.binput__sub {
+    width: 35%;
+    background-color: teal;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-left: 100px;
+      
+}
+
+.bimage {
+    margin-top: 10px;
+    margin-left:15px;
+    border-radius: 25px;
+}

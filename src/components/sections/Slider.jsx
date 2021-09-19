@@ -5,25 +5,25 @@ const Slider = () => {
   const slides = [
     {
       img:
-        "https://images.pexels.com/photos/2599537/pexels-photo-2599537.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://cdn.pixabay.com/photo/2017/08/23/16/03/io-centers-2673317__340.jpg",
         
     
     },
     {
       img:
-        "https://images.pexels.com/photos/2714581/pexels-photo-2714581.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://cdn.pixabay.com/photo/2020/04/30/23/28/people-5114920__340.jpg",
     },
     {
       img:
-        "https://images.pexels.com/photos/2878019/pexels-photo-2878019.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+        "https://cdn.pixabay.com/photo/2021/03/18/19/49/home-office-6105736__340.jpg",
     },
     {
       img:
-        "https://images.pexels.com/photos/1142950/pexels-photo-1142950.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://cdn.pixabay.com/photo/2015/12/08/00/31/office-1081807__340.jpg",
     },
     {
       img:
-        "https://images.pexels.com/photos/3124111/pexels-photo-3124111.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://cdn.pixabay.com/photo/2020/08/25/18/29/workplace-5517762__340.jpg",
     },
   ];
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -59,7 +59,7 @@ const Slider = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Flex w="80%" overflow="hidden">
+      <Flex w="90%" overflow="hidden">
         <Flex pos="relative" h="400px" w="full" {...carouselStyle}>
           {slides.map((slide, sid) => (
             <Box key={`slide-${sid}`} flex="none" boxSize="full" shadow="md">

@@ -1,8 +1,9 @@
 import React from "react";
-import './ModalFilter.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import Upload from '../../sections/Upload/Upload';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { BsUpload } from "react-icons/bs";
+import './ModalWorkspace.css';
+import UploadWorkspace from '../Upload/UploadWorkspace/UploadWorkspace'
 import {
     Button,
     useDisclosure,
@@ -17,16 +18,16 @@ import {
   } from "@chakra-ui/react"
 
 
-function VerticallyCenter() {
+function ModalWorkspace() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const initialRef = React.useRef()
   const finalRef = React.useRef()
 
   return (
-    <div className="modal">
+    <div className="bmodal">
       <Button onClick={onOpen}>
-        <FontAwesomeIcon icon={faUserCircle} />
+        <FontAwesomeIcon icon={faUpload} />
       </Button>
 
       <Modal
@@ -38,10 +39,11 @@ function VerticallyCenter() {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
-          <ModalBody>
-        <Upload />
           
-          </ModalBody>
+
+          <UploadWorkspace />
+          
+          
           <ModalFooter>
           <Button onClick={onClose}>Cancelar</Button>
           </ModalFooter>
@@ -51,4 +53,4 @@ function VerticallyCenter() {
   )
 }
 
-export {VerticallyCenter}
+export {ModalWorkspace}
