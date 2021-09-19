@@ -1,0 +1,10 @@
+.bflex{
+    height: 480px;   
+}
+
+  @media screen and (max-width: 640px) {
+    .bflex {
+        height: 210px;    
+    }
+  }
+  

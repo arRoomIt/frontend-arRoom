@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, Box, Flex, useColorModeValue, Image } from "@chakra-ui/react";
+import './Slider.css';
 
 const Slider = () => {
   const slides = [
@@ -53,7 +54,7 @@ const Slider = () => {
     <Flex
       w="full"
       bg={useColorModeValue("gray.100", "gray.800")}
-      p={10}
+      p={1}
       alignItems="center"
       justifyContent="center"
     >
@@ -63,7 +64,7 @@ const Slider = () => {
             "85%", // 48em-62em
             "60%", // 62em+
           ]} overflow="hidden">
-        <Flex pos="relative" h="400px" w="full" {...carouselStyle}>
+        <Flex className="bflex" pos="relative" w="full" {...carouselStyle}>
           {slides.map((slide, sid) => (
             <Box key={`slide-${sid}`} flex="none" boxSize="full" shadow="md">
               <Text
