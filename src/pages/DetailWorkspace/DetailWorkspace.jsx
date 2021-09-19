@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Map } from '../../components/sections/Map/Map'
+import { Map, CalendarDetail } from '../../components/sections';
 import { getWorkspaceById } from  '../../api/WorkspaceApi'
 import { useLocation } from 'react-router-dom';
 import { Image, Box, Grid} from "@chakra-ui/react";
@@ -26,12 +26,12 @@ function DetailWorkspace() {
 
     
     useEffect(() => {
-
+    if(workSpaceId !== undefined){
     getWorkspaceById(workSpaceId).then(result => {
         setDetail(result);
-        setChange(false);
-        
+        setChange(false); 
     })
+}
 }, [change, workSpaceId]);
 
     
@@ -83,6 +83,7 @@ function DetailWorkspace() {
     </div>
           </Grid>
             <Map />
+            <CalendarDetail/>
     </div>
     
     )

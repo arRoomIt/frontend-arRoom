@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Home,ListWorkspace,DetailWorkspace,User } from '../../../pages/index';
 import{Header} from '..';
 import {  Switch, Route } from 'react-router-dom';
+import { UserContext } from '../../../auth/UserContext';
+import { PrivateRoute } from './PrivateRouter';
 
 function DashboardRouter() {
+
+  const [userContext] = useContext(UserContext);
+  console.log('dasboard router', userContext);
+
     return (
         <>
             <div>
@@ -24,9 +30,12 @@ function DashboardRouter() {
           <DetailWorkspace/>
         </Route>
 
-        <Route path="/profile" component={User}>
-          <User/>
-        </Route>
+        <PrivateRoute 
+            path="/profile" 
+            component={User}
+            isAuthenticated = {userContext._id !== ""}
+            />
+          
 
         <Route path="*">
           <h1>404 Page Not Found</h1>

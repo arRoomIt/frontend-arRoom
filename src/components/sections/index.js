@@ -6,6 +6,8 @@ import Card from './Card';
 import Paginacion from './Paginacion';
 import Footer from './Footer';
 import Logout from './Logout/Logout';
+import CalendarDetail from './Calendar/Calendar'
+import Map from './Map/Map.jsx';
 import Upload from './Upload/Upload'
 import UploadWorkspace from './Upload/UploadWorkspace/UploadWorkspace';
 
@@ -18,6 +20,8 @@ export {
     Paginacion,
     Footer,
     Logout,
+    CalendarDetail,
+    Map,
     UploadWorkspace,
     Upload
 }
