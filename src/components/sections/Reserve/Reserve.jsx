@@ -9,17 +9,19 @@ import {
     Button,
     Flex,
 } from "@chakra-ui/react"
-
-import CalendarDetail from '../Calendar/Calendar';
+import { postReservation } from '../../../api/reservation.api';
 
 function Reserve(props) {
 
     const detail = props.detail;
     if (detail.reviews === undefined) detail.reviews = [];
 
-
     //precio total
-    const [totalPrice,setTotalPrice] = useState();
+    const [totalPrice,setTotalPrice] = useState("0");
+
+    useEffect(() => {
+        setTotalPrice(detail.price);
+    },[detail])
 
 
     //guardar fechas
@@ -46,6 +48,23 @@ function Reserve(props) {
         }
     }
 
+    const createReservation = () => {
+        const newReservations = {
+            start:startDay,
+            end:endDay,
+            price:totalPrice,
+            workspaceId:detail._id,
+        }
+        postReservation(newReservations)
+            .then((result) =>{
+                console.log(result);
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+
+    }
+
     useEffect(() => {
         const differenceTime = endDay.getTime() - startDay.getTime();
         let differenceDay = differenceTime / (1000 * 3600 * 24);
@@ -55,7 +74,7 @@ function Reserve(props) {
 
     useEffect(() => {
         const num = totalDays * detail.price;
-        setTotalPrice(num+25)
+        setTotalPrice(num + detail.price);
     },[totalDays])
 
 
@@ -85,12 +104,17 @@ function Reserve(props) {
                         fontWeight={["bold",]}
                         lineHeight="tight"
                     >
-                        Total: {totalPrice} €
+                        Total: {totalPrice !== NaN && 
+                            `${totalPrice}`
+                        } €
                     </Text>
                 </Box>
 
                 <Box mt="3" >
-                    <Button colorScheme="teal" >Reserve Now!</Button>
+                    <Button 
+                        colorScheme="teal" 
+                        onClick={createReservation}    
+                    >Reserve Now!</Button>
                 </Box>
             </Flex>
 
