@@ -164,12 +164,13 @@ function UploadWorkspace() {
                     <Checkbox
                         id="hasAirCon"
                         name="hasAirCon"
+                        passive={false}
                         type="text"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.hasAirCon}
                     >
-                    hasAirCon
+                    AirCon
                     </Checkbox>
                     {formik.touched.hasAirCon && formik.errors.hasAirCon ? (
                         <div className="error">{formik.errors.hasAirCon}</div>
@@ -184,7 +185,7 @@ function UploadWorkspace() {
                         onBlur={formik.handleBlur}
                         value={formik.values.hasAirHeating}
                     >
-                    hasAirHeating
+                    AirHeating
                     </Checkbox>
                     {formik.touched.hasAirHeating && formik.errors.hasAirHeating ? (
                         <div className="error">{formik.errors.hasAirHeating}</div>
@@ -199,7 +200,7 @@ function UploadWorkspace() {
                        onBlur={formik.handleBlur}
                        value={formik.values.hasInternet}
                     >
-                    hasInternet
+                    Internet
                     </Checkbox>
                     {formik.touched.hasInternet && formik.errors.hasInternet ? (
                         <div className="error">{formik.errors.hasInternet}</div>
