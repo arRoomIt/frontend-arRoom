@@ -72,7 +72,7 @@ function Upload() {
             {sucess &&
                 toast({
                     position: "top",
-                    title: "You are very handsome! 😍😍",
+                    title: "You are very handsome! 😍",
                     description: 'Your profile image has been uploaded successfully!',
                     status: "success",
                     duration: 6000,
