@@ -16,6 +16,8 @@ import { DividerWithText } from '../../../pages/Login/DividerWithText'
 import { Link } from '../../../pages/Login/Link'
 import { Link as ReachLink } from "react-router-dom";
 
+import { AiFillHome } from "react-icons/ai";
+
 
 import RegisterForm from '../../sections/Register/RegisterForm';
 
@@ -25,6 +27,12 @@ import RegisterForm from '../../sections/Register/RegisterForm';
 
 function RegisterLayout() {
     return (
+    <div>
+        <Link as={ReachLink} to="/">
+            <Button variant="ghost" leftIcon={<AiFillHome />}>
+            Home
+            </Button>
+        </Link>
         <Box
             bg={useColorModeValue('gray.50', 'inherit')}
             minH="100vh"
@@ -57,6 +65,7 @@ function RegisterLayout() {
 
             </Box>
         </Box>
+    </div>
     )
 }
 
