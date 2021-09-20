@@ -40,7 +40,7 @@ const Slider = () => {
     ml: `-${currentSlide * 100}%`,
   };
 
-  const SLIDES_INTERVAL_TIME = 10000;
+  const SLIDES_INTERVAL_TIME = 4000;
   const ANIMATION_DIRECTION = "right";
 
   useEffect(() => {
@@ -67,19 +67,7 @@ const Slider = () => {
         <Flex className="bflex" pos="relative" w="full" {...carouselStyle}>
           {slides.map((slide, sid) => (
             <Box key={`slide-${sid}`} flex="none" boxSize="full" shadow="md">
-              <Text
-                color="white"
-                fontSize="xs"
-                p="8px 12px"
-                pos="absolute"
-                top="0"
-                whiteSpace="nowrap"
-                
-              >
-                {sid + 1} / {slidesCount}
-              </Text>
-              <Image src={slide.img} boxSize="full" backgroundSize="cover" />
-              
+              <Image src={slide.img} boxSize="full" backgroundSize="cover" />  
             </Box>
           ))}
         </Flex>
