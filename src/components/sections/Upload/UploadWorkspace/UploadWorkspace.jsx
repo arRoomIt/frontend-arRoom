@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { useFormik } from "formik";
-import { Button, InputGroup, InputRightElement, FormLabel, Input, Text, Stack,useColorModeValue,Box, Checkbox } from '@chakra-ui/react'
+import { Button, InputGroup, InputRightElement, FormLabel, Input, Text, Stack,useColorModeValue,Box, Checkbox, useToast } from '@chakra-ui/react'
 
 import { Card } from '../../../../pages/Login/Card'
 import { postWorkspace } from '../../../../api/WorkspaceApi';
@@ -12,6 +12,9 @@ function UploadWorkspace() {
 
     const [imgeEncoded,setImageEncoded] = useState();
 
+    
+    const toast = useToast()
+
     const validate = (values) => {
         const errors = {};
 
@@ -20,9 +23,6 @@ function UploadWorkspace() {
         if (!values.direction) errors.direction = "Required";
         if (!values.roomType) errors.roomType = "Required";
         if (!values.totalOccupancy) errors.totalOccupancy = "Required";
-        // if (!values.hasAirCon) errors.hasAirCon = "Required";
-        // if (!values.hasAirHeating) errors.hasAirHeating = "Required";
-        // if (!values.hasInternet) errors.hasInternet = "Required";
         if (!values.price) errors.price = "Required";
 
         return errors;
@@ -83,13 +83,6 @@ function UploadWorkspace() {
 
     return (
 
-        // <Box
-        //     bg={useColorModeValue('gray.50', 'inherit')}
-        //     minH="100vh"
-        //     py="12"
-        //     px={{ base: '4', lg: '8' }}
-        // >
-        //     <Box maxW="md" mx="auto">
 
         <Card>
             <h1>Upload workspace</h1>
@@ -234,7 +227,21 @@ function UploadWorkspace() {
 
                 </Stack>
 
-                <Button type="submit">Submit</Button>
+                <Button 
+                    type="submit"
+                    onClick={()=>{
+                        toast({
+                            title: "Your Workspace has been created successfully! 👍",
+                            description: "Have your phone charged",
+                            status: "info",
+                            position: "top",
+                            duration: 3000,
+                            isClosable: true,
+                        })
+                    }}
+                >
+                    Submit
+                </Button>
             </form>
         </Card>
         // </Box>
