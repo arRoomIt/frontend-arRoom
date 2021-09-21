@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useFormik } from "formik";
 import { Button, InputGroup, InputRightElement, FormLabel, Input, Text, Stack,useColorModeValue,Box, Checkbox, useToast } from '@chakra-ui/react'
 
@@ -14,6 +14,15 @@ function UploadWorkspace() {
 
     
     const toast = useToast()
+    const [sucess, setSucess] = useState(false);
+    const [errorToast, setErrorTost] = useState(false);
+    useEffect(() => {
+      setSucess(false);
+    }, [sucess])
+  
+    useEffect(() => {
+      setErrorTost(false);
+    }, [errorToast])
 
     const validate = (values) => {
         const errors = {};
@@ -60,8 +69,10 @@ function UploadWorkspace() {
                 newWorkspace.longitude = location.longitude;
                 console.log(newWorkspace);
                 await postWorkspace(newWorkspace);
+                setSucess(true);
 
             } catch (error) {
+                setErrorTost(true);
                 console.log(error);
             }
 
@@ -83,8 +94,30 @@ function UploadWorkspace() {
 
     return (
 
-
+        
+        
         <Card>
+            {sucess &&
+                toast({
+                  title: "Your Workspace has been created successfully! 👍",
+                  description: "Have your phone charged",
+                  status: "info",
+                  position: "top",
+                  duration: 3000,
+                  isClosable: true,
+                })
+              }
+        
+              {errorToast &&
+                toast({
+                  title: "We had an error!😱",
+                  description: "Try again later!",
+                  status: "error",
+                  position: "top",
+                  duration: 3000,
+                  isClosable: true,
+                })
+              }
             <h1>Upload workspace</h1>
             <form onSubmit={formik.handleSubmit}>
                 <Stack>
@@ -229,16 +262,16 @@ function UploadWorkspace() {
 
                 <Button 
                     type="submit"
-                    onClick={()=>{
-                        toast({
-                            title: "Your Workspace has been created successfully! 👍",
-                            description: "Have your phone charged",
-                            status: "info",
-                            position: "top",
-                            duration: 3000,
-                            isClosable: true,
-                        })
-                    }}
+                    // onClick={()=>{
+                    //     toast({
+                    //         title: "Your Workspace has been created successfully! 👍",
+                    //         description: "Have your phone charged",
+                    //         status: "info",
+                    //         position: "top",
+                    //         duration: 3000,
+                    //         isClosable: true,
+                    //     })
+                    // }}
                 >
                     Submit
                 </Button>
